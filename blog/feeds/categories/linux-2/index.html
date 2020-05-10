@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>www.eduherraiz.com - Entradas de la categoría Linux</title><link>http://www.eduherraiz.com/blog/categories/linux-2/</link><description>Las últimas entradas de la categoría Linux</description><atom:link href="http://www.eduherraiz.com/blog/feeds/categories/linux-2/" rel="self"></atom:link><language>es</language><copyright>Zinnia</copyright><lastBuildDate>Fri, 16 Dec 2011 12:52:28 +0000</lastBuildDate><item><title>Script con beep para hacer sonar la marcha imperial
+</title><link>http://www.eduherraiz.com/blog/2011/12/16/script-con-beep-para-hacer-sonar-la-marcha-imperial/</link><description>&lt;div&gt;Me acord&amp;eacute; de un script antiguo que pululaba por un foro de estudiantes de inform&amp;aacute;tica de la UIB. Lo encontr&amp;eacute; y lo publico aqu&amp;iacute; para quede para la posteridad.&lt;/div&gt;
+
+&lt;div&gt;Pod&amp;eacute;is ver como define las notas en variable y mediante el comando &lt;strong&gt;beep&lt;/strong&gt; ejecuta las notas con un peque&amp;ntilde;o retraso configurable entre ellas. Hace tiempo lo hicimos sonar en el cluster de nuestro CPD, l&amp;aacute;stima que no conserve alg&amp;uacute;n v&amp;iacute;deo.&lt;/div&gt;
+
+&lt;div&gt;&amp;nbsp;&lt;/div&gt;
+
+&lt;pre&gt;
+#!/bin/bash
+MIb=&amp;rdquo;312.1&amp;Prime;
+FA1=&amp;rdquo;370.0&amp;Prime;
+SOL=&amp;rdquo;392.0&amp;Prime;
+SIb=&amp;rdquo;466.2&amp;Prime;
+RE=&amp;rdquo;587.33&amp;Prime;
+MI8b=&amp;rdquo;622.254&amp;Prime;
+DELAY=50
+NEGRA=&amp;rdquo;300&amp;Prime;
+PUNTET=$(( NEGRA*3/4 ))
+MITJ=$(( NEGRA/4 ))
+beep -f $SOL -l $NEGRA -D $DELAY -r 3
+beep -f $MIb -l $PUNTET -D $DELAY
+beep -f $SIb -l $MITJ -D $DELAY
+beep -f $SOL -l $NEGRA -D $DELAY
+beep -f $MIb -l $PUNTET -D $DELAY
+beep -f $SIb -l $MITJ -D $DELAY
+beep -f $SOL -l 600 -D $DELAY
+beep -f $RE -l $NEGRA -D $DELAY -r 3
+beep -f $MI8b -l $PUNTET -D $DELAY
+beep -f $SIb -l $MITJ -D $DELAY
+beep -f $FA1 -l $NEGRA -D $DELAY
+beep -f $MIb -l $PUNTET -D $DELAY
+beep -f $SIb -l $MITJ -D $DELAY
+beep -f $SOL -l 600 -D $DELAY&lt;/pre&gt;
+
+&lt;div&gt;&amp;nbsp;&lt;/div&gt;
+
+&lt;div&gt;Edit: El v&amp;iacute;deo que comenta worm es de la propia Aulalinux de la UIB y ejecutando el script en todos los ordenador a la vez.&lt;/div&gt;
+
+&lt;p&gt;&lt;iframe allowfullscreen="" frameborder="0" height="315" src="//www.youtube.com/embed/MoAtqOMiXpo" width="420"&gt;&lt;/iframe&gt;&lt;/p&gt;
+
+&lt;div&gt;Y ya que estoy incluyendo videos os dejo el que me record&amp;oacute; y me hizo buscar el script, utilizando disqueteras antiguas para hacer sonar de nuevo la marcha imperial:&lt;/div&gt;
+
+&lt;p&gt;&lt;iframe allowfullscreen="" frameborder="0" height="315" src="//www.youtube.com/embed/qWkUFxItWmU" width="420"&gt;&lt;/iframe&gt;&lt;/p&gt;
+
+</description><author>gshark@gmail.com (Edu Herraiz)</author><pubDate>Fri, 16 Dec 2011 12:52:28 +0000</pubDate><guid>http://www.eduherraiz.com/blog/2011/12/16/script-con-beep-para-hacer-sonar-la-marcha-imperial/</guid><category>Linux</category><category>Programación</category></item><item><title>Use ephiphan VGA2USB framegrabber with video4linux2 interface (v4l2)
+</title><link>http://www.eduherraiz.com/blog/2011/11/08/use-ephiphan-vga2usb-framegrabber-with-video4linux2-interface-v4l2/</link><description>&lt;p&gt;For a project to record seminars at IFISC, I bought a framegrabber to a Canadian company, Epiphan. The product is working properly and is capturing from a VGA signal in linux, like they promised. However, I had a problem when I tried to upgrade all the recording system, the linux video device generated for the vga2usb kernel module was in the version 1 of the video4linux interface. All the new video applications that I need, use the second version (video4linux2, v4l2). I went mad looking for a solution, and finally I wrote to the company asking about how to solve this. The solution is very simple, if you want to use the second version just pass a parameter (&lt;strong&gt;v4l2_enable=1&lt;/strong&gt;) loading the module. Change the line in Makefile:&lt;/p&gt;
+
+&lt;blockquote&gt;sudo /sbin/insmod $(vga2usb-module)&lt;/blockquote&gt;
+
+&lt;p&gt;For:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;div id="_mcePaste"&gt;sudo /sbin/insmod $(vga2usb-module) v4l2_enable=1&lt;/div&gt;
+&lt;/blockquote&gt;
+
+&lt;div&gt;Dont look in the manual or readme of the module, is a undocumented feature.&lt;/div&gt;
+
+</description><author>gshark@gmail.com (Edu Herraiz)</author><pubDate>Tue, 08 Nov 2011 15:14:05 +0000</pubDate><guid>http://www.eduherraiz.com/blog/2011/11/08/use-ephiphan-vga2usb-framegrabber-with-video4linux2-interface-v4l2/</guid><category>Linux</category></item></channel></rss>
