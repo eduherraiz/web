@@ -59,13 +59,4 @@ jQuery(document).ready(function($) {
         listTickerInner(options.startIndex);
     }
 
-    $(function() {
-        listTicker({
-            list: words,
-            startIndex:0,
-            trickerPanel: $('#titulo'),
-            interval: interval_profession
-        });
-    });
-
 });
