@@ -1,11 +1,16 @@
 """Generate index.html (es) and en/index.html from content.json.
 
-Usage: python3 build.py
+Usage: python3 build.py            # generate
+       python3 build.py --check    # also check every link answers (needs network)
 
+Only live projects are listed: an entry without links is skipped. When a
+project's site dies, point it to its repo instead of removing it.
 Text fields can be "es|en" when the two languages differ; projects and news
 carry "es" and "en" keys. Edit content.json, run this, commit both outputs.
 """
 import json
+import sys
+import urllib.request
 from html import escape
 from pathlib import Path
 
@@ -60,9 +65,9 @@ def page(c, lang):
         f'      <li><span class="date">{date(n["date"], lang, ui)}</span>'
         + (f'{ext(n["url"])}{escape(n[lang])}</a>' if n.get("url") else f'<span>{escape(n[lang])}</span>')
         + "</li>" for n in c["news"])
-    groups = "\n".join(
-        f'    <h3>{ui[k]}</h3>\n    <ul class="projects">\n' + "\n".join(project(p, lang, ui) for p in c["projects"][k]) + "\n    </ul>"
-        for k in ("now", "before", "oss"))
+    def plist(items):
+        return '    <ul class="projects">\n' + "\n".join(project(p, lang, ui) for p in items if p.get("links")) + "\n    </ul>"
+    groups = plist(c["projects"]["list"]) + f'\n    <h3>{ui["oss"]}</h3>\n' + plist(c["projects"]["oss"])
     return f"""<!doctype html>
 <html lang="{lang}">
 <head>
@@ -130,8 +135,28 @@ def page(c, lang):
 """
 
 
+def check(c):
+    urls = [n["url"] for n in c["news"] if n.get("url")]
+    urls += [u for k in c["projects"] for p in c["projects"][k] for u in p.get("links", {}).values()]
+    urls += list(c["links"].values())
+    bad = []
+    for u in dict.fromkeys(urls):
+        try:
+            req = urllib.request.Request(u, headers={"User-Agent": "Mozilla/5.0"})
+            code = urllib.request.urlopen(req, timeout=15).status
+        except Exception as e:
+            code = getattr(e, "code", None) or type(e).__name__
+        # LinkedIn answers 999 to bots; the link itself is fine
+        if code not in (200, 999):
+            bad.append(f"  {code}  {u}")
+    print("\n".join(["enlaces caídos:"] + bad) if bad else "todos los enlaces responden")
+    return not bad
+
+
 def main():
     c = json.loads((ROOT / "content.json").read_text())
+    if "--check" in sys.argv and not check(c):
+        sys.exit(1)
     (ROOT / "index.html").write_text(page(c, "es"))
     (ROOT / "en").mkdir(exist_ok=True)
     (ROOT / "en" / "index.html").write_text(page(c, "en"))

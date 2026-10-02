@@ -15,8 +15,6 @@
       "tagline": "Cloud architect y developer en Mallorca. En mis ratos libres construyo máquinas para pensar, jugar y ayudar.",
       "news": "Novedades",
       "projects": "Proyectos",
-      "now": "Ahora",
-      "before": "Antes",
       "oss": "Código abierto",
       "work": "Trabajo",
       "contact": "Contacto",
@@ -34,8 +32,6 @@
       "tagline": "Cloud architect and developer in Mallorca. In my spare time I build machines to think, play and help.",
       "news": "News",
       "projects": "Projects",
-      "now": "Now",
-      "before": "Earlier",
       "oss": "Open source",
       "work": "Work",
       "contact": "Contact",
@@ -67,7 +63,7 @@
     }
   ],
   "projects": {
-    "now": [
+    "list": [
       {
         "name": "Ball Radar",
         "year": "2026",
@@ -89,17 +85,6 @@
           "GitHub": "https://github.com/eduherraiz/bombshot",
           "Vídeo|Video": "https://www.youtube.com/watch?v=b6ZcncrODek"
         }
-      }
-    ],
-    "before": [
-      {
-        "name": "Pescando en Mallorca",
-        "tags": "Blog",
-        "es": "Blog familiar de pesca que acabó siendo punto de encuentro de pescadores mallorquines.",
-        "en": "A family fishing blog that became a meeting point for Mallorcan anglers.",
-        "links": {
-          "Web": "https://www.pescandoenmallorca.com"
-        }
       },
       {
         "name": "PyMallorca",
@@ -109,12 +94,6 @@
         "links": {
           "Web": "https://pymallorca.org"
         }
-      },
-      {
-        "name": "Vagi.be",
-        "tags": "Django",
-        "es": "Visor de webcams geolocalizadas de todo el mundo, con el tiempo y la fase lunar.",
-        "en": "Geolocated webcams from all over the world, with weather and moon phase."
       },
       {
         "name": "Palabras|Words",
@@ -147,13 +126,26 @@
         }
       },
       {
-        "name": "Algaida wireless",
-        "tags": "Wi-Fi",
-        "es": "Red wifi comunitaria en Algaida: antenas y nodos hechos a mano.",
-        "en": "Community Wi-Fi network in Algaida: handmade antennas and nodes."
+        "name": "Pescando en Mallorca",
+        "tags": "Blog",
+        "es": "Blog familiar de pesca que acabó siendo punto de encuentro de pescadores mallorquines.",
+        "en": "A family fishing blog that became a meeting point for Mallorcan anglers.",
+        "links": {
+          "Web": "https://www.pescandoenmallorca.com"
+        }
       }
     ],
     "oss": [
+      {
+        "name": "PyConES 2016",
+        "year": "2016",
+        "tags": "Django",
+        "es": "Traducción de la web al catalán.",
+        "en": "Catalan translation of the website.",
+        "links": {
+          "GitHub": "https://github.com/eduherraiz/PyConES-2016"
+        }
+      },
       {
         "name": "thumbor/remotecv",
         "year": "2015",
@@ -172,16 +164,6 @@
         "en": "Fix in the pip module for Mercurial repos.",
         "links": {
           "GitHub": "https://github.com/saltstack/salt/pulls?q=is%3Apr+author%3Aeduherraiz"
-        }
-      },
-      {
-        "name": "PyConES 2016",
-        "year": "2016",
-        "tags": "Django",
-        "es": "Traducción de la web al catalán.",
-        "en": "Catalan translation of the website.",
-        "links": {
-          "GitHub": "https://github.com/eduherraiz/PyConES-2016"
         }
       }
     ]
