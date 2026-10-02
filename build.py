@@ -67,7 +67,7 @@ def page(c, lang):
         + "</li>" for n in c["news"])
     def plist(items):
         return '    <ul class="projects">\n' + "\n".join(project(p, lang, ui) for p in items if p.get("links")) + "\n    </ul>"
-    groups = plist(c["projects"]["list"]) + f'\n    <h3>{ui["oss"]}</h3>\n' + plist(c["projects"]["oss"])
+    groups = plist(c["projects"]["list"])
     return f"""<!doctype html>
 <html lang="{lang}">
 <head>

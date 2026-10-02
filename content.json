@@ -15,7 +15,6 @@
       "tagline": "Cloud architect y developer en Mallorca. En mis ratos libres construyo máquinas para pensar, jugar y ayudar.",
       "news": "Novedades",
       "projects": "Proyectos",
-      "oss": "Código abierto",
       "work": "Trabajo",
       "contact": "Contacto",
       "ars_intro": "Mi laboratorio de proyectos: domótica, apps y juegos, IA y divulgación. Lleva el nombre de la máquina de razonar que Ramon Llull ideó en el Puig de Randa, en Algaida.",
@@ -32,7 +31,6 @@
       "tagline": "Cloud architect and developer in Mallorca. In my spare time I build machines to think, play and help.",
       "news": "News",
       "projects": "Projects",
-      "oss": "Open source",
       "work": "Work",
       "contact": "Contact",
       "ars_intro": "My project lab: home automation, apps and games, AI and science communication. Named after the reasoning machine Ramon Llull conceived on Puig de Randa, in Algaida.",
@@ -87,83 +85,12 @@
         }
       },
       {
-        "name": "PyMallorca",
-        "tags": "Comunidad|Community",
-        "es": "Impulsé la comunidad de Python en Mallorca.",
-        "en": "I helped start the Python community in Mallorca.",
-        "links": {
-          "Web": "https://pymallorca.org"
-        }
-      },
-      {
-        "name": "Palabras|Words",
-        "year": "2014",
-        "tags": "Django",
-        "es": "Qué palabras se pueden formar con unas letras, en castellano y catalán.",
-        "en": "Which words you can make with a set of letters, in Spanish and Catalan.",
-        "links": {
-          "GitHub": "https://github.com/eduherraiz/words_with_letters"
-        }
-      },
-      {
-        "name": "Foowill",
-        "year": "2012",
-        "tags": "Django · Celery",
-        "es": "Tuits guardados que se publicaban solos cuando dejabas de dar señales de vida.",
-        "en": "Stored tweets that got published once you stopped showing signs of life.",
-        "links": {
-          "GitHub": "https://github.com/eduherraiz/foowill"
-        }
-      },
-      {
-        "name": "Solar",
-        "year": "2012",
-        "tags": "Symfony",
-        "es": "Aplicación de gestión para un pequeño instituto de investigación.",
-        "en": "Management app for a small research institute.",
-        "links": {
-          "GitHub": "https://github.com/eduherraiz/Solar"
-        }
-      },
-      {
         "name": "Pescando en Mallorca",
         "tags": "Blog",
         "es": "Blog familiar de pesca que acabó siendo punto de encuentro de pescadores mallorquines.",
         "en": "A family fishing blog that became a meeting point for Mallorcan anglers.",
         "links": {
           "Web": "https://www.pescandoenmallorca.com"
-        }
-      }
-    ],
-    "oss": [
-      {
-        "name": "PyConES 2016",
-        "year": "2016",
-        "tags": "Django",
-        "es": "Traducción de la web al catalán.",
-        "en": "Catalan translation of the website.",
-        "links": {
-          "GitHub": "https://github.com/eduherraiz/PyConES-2016"
-        }
-      },
-      {
-        "name": "thumbor/remotecv",
-        "year": "2015",
-        "tags": "Python",
-        "es": "Detector de características y arreglos.",
-        "en": "Feature detector and fixes.",
-        "links": {
-          "GitHub": "https://github.com/thumbor/remotecv/pulls?q=is%3Apr+author%3Aeduherraiz"
-        }
-      },
-      {
-        "name": "saltstack/salt",
-        "year": "2014",
-        "tags": "Python",
-        "es": "Arreglo en el módulo pip para repos de Mercurial.",
-        "en": "Fix in the pip module for Mercurial repos.",
-        "links": {
-          "GitHub": "https://github.com/saltstack/salt/pulls?q=is%3Apr+author%3Aeduherraiz"
         }
       }
     ]
