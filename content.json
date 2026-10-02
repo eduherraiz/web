@@ -1,0 +1,89 @@
+{
+  "name": "Edu Herraiz",
+  "email": "edu@eduherraiz.com",
+  "links": {
+    "github": "https://github.com/eduherraiz",
+    "linkedin": "https://www.linkedin.com/in/edu-herraiz-27b81130",
+    "youtube": "https://www.youtube.com/@arsmagna_lab"
+  },
+  "ui": {
+    "es": {
+      "lang_switch": "English", "lang_href": "en/",
+      "title": "Edu Herraiz · Cloud architect y developer en Mallorca",
+      "description": "Web personal de Edu Herraiz: cloud architect y developer en Mallorca. Proyectos propios, Ars Magna y trabajo.",
+      "tagline": "Cloud architect y developer en Mallorca. En mis ratos libres construyo máquinas para pensar, jugar y ayudar.",
+      "news": "Novedades", "projects": "Proyectos", "now": "Ahora", "before": "Antes", "oss": "Código abierto",
+      "work": "Trabajo", "contact": "Contacto", "soon": "Próximamente", "private": "privado",
+      "ars_intro": "Mi laboratorio de proyectos: domótica, apps y juegos, IA y divulgación. Lleva el nombre de la máquina de razonar que Ramon Llull ideó en el Puig de Randa, en Algaida.",
+      "ars_link": "Canal de YouTube",
+      "work_text": "Cloud architect y developer en Nagarro. Antes, sistemas y desarrollo web en APSL. Trabajo con AWS, GNU/Linux y Python, y me obsesiona automatizar: integración continua, infraestructura como código y sistemas que se reparan solos.",
+      "contact_text": "Para colaboraciones, proyectos o simplemente saludar:",
+      "footer": "Hecha a mano en Mallorca. Sin cookies ni rastreadores."
+    },
+    "en": {
+      "lang_switch": "Español", "lang_href": "../",
+      "title": "Edu Herraiz · Cloud architect and developer in Mallorca",
+      "description": "Personal website of Edu Herraiz: cloud architect and developer in Mallorca. Side projects, Ars Magna and work.",
+      "tagline": "Cloud architect and developer in Mallorca. In my spare time I build machines to think, play and help.",
+      "news": "News", "projects": "Projects", "now": "Now", "before": "Earlier", "oss": "Open source",
+      "work": "Work", "contact": "Contact", "soon": "Coming soon", "private": "private",
+      "ars_intro": "My project lab: home automation, apps and games, AI and science communication. Named after the reasoning machine Ramon Llull conceived on Puig de Randa, in Algaida.",
+      "ars_link": "YouTube channel",
+      "work_text": "Cloud architect and developer at Nagarro. Previously systems and web development at APSL. I work with AWS, GNU/Linux and Python, and I'm obsessed with automation: continuous integration, infrastructure as code and self-healing systems.",
+      "contact_text": "For collaborations, projects or just to say hi:",
+      "footer": "Handmade in Mallorca. No cookies, no trackers."
+    }
+  },
+  "news": [
+    {"date": "2026-10", "es": "Nace Ars Magna: el canal de YouTube cambia de piel.", "en": "Ars Magna is born: the YouTube channel gets a new skin.", "url": "https://www.youtube.com/@arsmagna_lab"},
+    {"date": "2026-09", "es": "Ball Radar ya está en Google Play.", "en": "Ball Radar is out on Google Play.", "url": "https://play.google.com/store/apps/details?id=com.ballradar.app"},
+    {"date": "2026-08", "es": "Bombshot: juegos de fiesta dentro de un Home Assistant Voice PE.", "en": "Bombshot: party games inside a Home Assistant Voice PE.", "url": "https://www.youtube.com/watch?v=b6ZcncrODek"},
+    {"date": "soon", "es": "El viaje de Clickhero: el recorrido de un click, de tu ratón a un servidor y vuelta.", "en": "Clickhero's journey: the trip of a click, from your mouse to a server and back."}
+  ],
+  "projects": {
+    "now": [
+      {"name": "Ball Radar", "year": "2026", "tags": "Flutter · Android",
+       "es": "Gincana GPS: esconde y encuentra las 7 esferas en el mundo real.", "en": "GPS treasure hunt: hide and find the 7 balls in the real world.",
+       "links": {"Google Play": "https://play.google.com/store/apps/details?id=com.ballradar.app", "Vídeo|Video": "https://www.youtube.com/watch?v=LTOWS466q20"}},
+      {"name": "Bombshot", "year": "2026", "tags": "Home Assistant · Python",
+       "es": "Juegos de fiesta que funcionan enteros dentro de un altavoz de Home Assistant.", "en": "Party games running entirely on a Home Assistant speaker.",
+       "links": {"GitHub": "https://github.com/eduherraiz/bombshot", "Vídeo|Video": "https://www.youtube.com/watch?v=b6ZcncrODek"}},
+      {"name": "El viaje de Clickhero|Clickhero's journey", "year": "2026", "tags": "Divulgación|Science communication", "soon": true,
+       "es": "Serie sobre lo que pasa entre que haces click y ves la respuesta.", "en": "A series about what happens between your click and the answer on screen."},
+      {"name": "Homelab", "tags": "Home Assistant · Frigate", "private": true,
+       "es": "La domótica, la red y los servicios de casa, todo como código.", "en": "Home automation, network and home services, all as code."}
+    ],
+    "before": [
+      {"name": "Pescando en Mallorca", "tags": "Blog",
+       "es": "Blog familiar de pesca que acabó siendo punto de encuentro de pescadores mallorquines.", "en": "A family fishing blog that became a meeting point for Mallorcan anglers.",
+       "links": {"Web": "https://www.pescandoenmallorca.com"}},
+      {"name": "PyMallorca", "tags": "Comunidad|Community",
+       "es": "Impulsé la comunidad de Python en Mallorca.", "en": "I helped start the Python community in Mallorca.",
+       "links": {"Web": "https://pymallorca.org"}},
+      {"name": "Vagi.be", "tags": "Django",
+       "es": "Visor de webcams geolocalizadas de todo el mundo, con el tiempo y la fase lunar.", "en": "Geolocated webcams from all over the world, with weather and moon phase."},
+      {"name": "Palabras|Words", "year": "2014", "tags": "Django",
+       "es": "Qué palabras se pueden formar con unas letras, en castellano y catalán.", "en": "Which words you can make with a set of letters, in Spanish and Catalan.",
+       "links": {"GitHub": "https://github.com/eduherraiz/words_with_letters"}},
+      {"name": "Foowill", "year": "2012", "tags": "Django · Celery",
+       "es": "Tuits guardados que se publicaban solos cuando dejabas de dar señales de vida.", "en": "Stored tweets that got published once you stopped showing signs of life.",
+       "links": {"GitHub": "https://github.com/eduherraiz/foowill"}},
+      {"name": "Solar", "year": "2012", "tags": "Symfony",
+       "es": "Aplicación de gestión para un pequeño instituto de investigación.", "en": "Management app for a small research institute.",
+       "links": {"GitHub": "https://github.com/eduherraiz/Solar"}},
+      {"name": "Algaida wireless", "tags": "Wi-Fi",
+       "es": "Red wifi comunitaria en Algaida: antenas y nodos hechos a mano.", "en": "Community Wi-Fi network in Algaida: handmade antennas and nodes."}
+    ],
+    "oss": [
+      {"name": "thumbor/remotecv", "year": "2015", "tags": "Python",
+       "es": "Detector de características y arreglos.", "en": "Feature detector and fixes.",
+       "links": {"GitHub": "https://github.com/thumbor/remotecv/pulls?q=is%3Apr+author%3Aeduherraiz"}},
+      {"name": "saltstack/salt", "year": "2014", "tags": "Python",
+       "es": "Arreglo en el módulo pip para repos de Mercurial.", "en": "Fix in the pip module for Mercurial repos.",
+       "links": {"GitHub": "https://github.com/saltstack/salt/pulls?q=is%3Apr+author%3Aeduherraiz"}},
+      {"name": "PyConES 2016", "year": "2016", "tags": "Django",
+       "es": "Traducción de la web al catalán.", "en": "Catalan translation of the website.",
+       "links": {"GitHub": "https://github.com/eduherraiz/PyConES-2016"}}
+    ]
+  }
+}
