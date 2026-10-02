@@ -57,6 +57,7 @@ h2 {
 h3 { font: 600 13px/1 Inter, sans-serif; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin: 32px 0 12px; }
 p { margin: 0 0 12px; }
 
+.more { display: flex; flex-wrap: wrap; gap: 6px 24px; }
 .ars h2 span { font-family: Cinzel, serif; font-size: 22px; letter-spacing: 3px; text-transform: none; color: var(--ink); }
 .wheel .chords line { stroke: var(--teal); stroke-width: 1.2; stroke-opacity: .6; }
 .wheel .ring { fill: none; stroke: var(--gold-soft); stroke-width: 3; }

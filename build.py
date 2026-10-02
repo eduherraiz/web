@@ -135,8 +135,8 @@ def home(c, lang):
 
   <section class="ars">
     <h2>{figure_a(30)}<span>Ars Magna Lab</span></h2>
-    <p>{escape(ui["ars_intro"])} <a href="ars-magna-lab/">{ui["why_link"]} →</a></p>
-    <p>{ext(L["youtube"])}{ui["ars_link"]} →</a></p>
+    <p>{escape(ui["ars_intro"])}</p>
+    <p class="more"><a href="ars-magna-lab/">{ui["why_link"]} →</a> {ext(L["youtube"])}{ui["ars_link"]} →</a></p>
     <h3>{ui["news"]}</h3>
     <ul class="news">
 {news}
