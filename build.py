@@ -39,8 +39,6 @@ def wheel(size=28):
 
 
 def date(d, lang, ui):
-    if d == "soon":
-        return ui["soon"]
     y, m = d.split("-")
     return f"{MONTHS[lang][int(m) - 1]} {y}"
 
@@ -48,9 +46,7 @@ def date(d, lang, ui):
 def project(p, lang, ui):
     meta = " · ".join(x for x in [p.get("year", ""), pick(p.get("tags", ""), lang)] if x)
     flags = ""
-    if p.get("soon"):
-        flags = f' <span class="flag">{ui["soon"]}</span>'
-    elif p.get("private"):
+    if p.get("private"):
         flags = f' <span class="flag">{ui["private"]}</span>'
     links = " ".join(f'{ext(u)}{escape(pick(k, lang))}</a>' for k, u in p.get("links", {}).items())
     return f"""      <li class="proj">
