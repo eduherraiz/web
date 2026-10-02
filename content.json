@@ -1,6 +1,11 @@
 {
   "name": "Edu Herraiz",
   "email": "edu@eduherraiz.com",
+  "langs": [
+    "es",
+    "en",
+    "ca"
+  ],
   "links": {
     "github": "https://github.com/eduherraiz",
     "linkedin": "https://www.linkedin.com/in/edu-herraiz-27b81130",
@@ -8,91 +13,196 @@
   },
   "ui": {
     "es": {
-      "lang_switch": "English",
-      "lang_href": "en/",
       "title": "Edu Herraiz · Cloud architect y developer en Mallorca",
-      "description": "Web personal de Edu Herraiz: cloud architect y developer en Mallorca. Proyectos propios, Ars Magna y trabajo.",
+      "description": "Web personal de Edu Herraiz: cloud architect y developer en Mallorca. Proyectos propios, Ars Magna Lab y trabajo.",
       "tagline": "Cloud architect y developer en Mallorca. En mis ratos libres construyo máquinas para pensar, jugar y ayudar.",
       "news": "Novedades",
       "projects": "Proyectos",
       "work": "Trabajo",
       "contact": "Contacto",
       "ars_intro": "Mi laboratorio de proyectos: domótica, apps y juegos, IA y divulgación. Lleva el nombre de la máquina de razonar que Ramon Llull ideó en el Puig de Randa, en Algaida, donde vivo y ando.",
+      "why_link": "¿Por qué el nombre?",
       "ars_link": "Canal de YouTube",
-      "work_text": "Cloud architect y developer en Nagarro. Antes, sistemas y desarrollo web en APSL. Trabajo con AWS, GNU/Linux y Python, y me obsesiona automatizar: integración continua, infraestructura como código y sistemas que se reparan solos.",
+      "work_text": "Cloud architect y developer en {nagarro}, que antes era {apsl} hasta que Nagarro la compró. Trabajo con AWS, GNU/Linux y Python, y me obsesiona automatizar: integración continua, infraestructura como código y sistemas que se reparan solos.",
       "contact_text": "Para colaboraciones, proyectos o simplemente saludar:",
-      "footer": "Hecha «a mano» en Mallorca. Sin cookies ni rastreadores."
+      "back": "Volver al inicio",
+      "footer": "Hecha «a mano» en Mallorca. Sin cookies ni rastreadores.",
+      "months": "ene feb mar abr may jun jul ago sep oct nov dic"
     },
     "en": {
-      "lang_switch": "Español",
-      "lang_href": "../",
       "title": "Edu Herraiz · Cloud architect and developer in Mallorca",
-      "description": "Personal website of Edu Herraiz: cloud architect and developer in Mallorca. Side projects, Ars Magna and work.",
+      "description": "Personal website of Edu Herraiz: cloud architect and developer in Mallorca. Side projects, Ars Magna Lab and work.",
       "tagline": "Cloud architect and developer in Mallorca. In my spare time I build machines to think, play and help.",
       "news": "News",
       "projects": "Projects",
       "work": "Work",
       "contact": "Contact",
       "ars_intro": "My project lab: home automation, apps and games, AI and science communication. Named after the reasoning machine Ramon Llull conceived on Puig de Randa, in Algaida, where I live and roam.",
+      "why_link": "Why the name?",
       "ars_link": "YouTube channel",
-      "work_text": "Cloud architect and developer at Nagarro. Previously systems and web development at APSL. I work with AWS, GNU/Linux and Python, and I'm obsessed with automation: continuous integration, infrastructure as code and self-healing systems.",
+      "work_text": "Cloud architect and developer at {nagarro}, formerly {apsl} until Nagarro acquired it. I work with AWS, GNU/Linux and Python, and I'm obsessed with automation: continuous integration, infrastructure as code and self-healing systems.",
       "contact_text": "For collaborations, projects or just to say hi:",
-      "footer": "“Handmade” in Mallorca. No cookies, no trackers."
+      "back": "Back to home",
+      "footer": "“Handmade” in Mallorca. No cookies, no trackers.",
+      "months": "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec"
+    },
+    "ca": {
+      "title": "Edu Herraiz · Cloud architect i developer a Mallorca",
+      "description": "Web personal d'Edu Herraiz: cloud architect i developer a Mallorca. Projectes propis, Ars Magna Lab i feina.",
+      "tagline": "Cloud architect i developer a Mallorca. En el meu temps lliure construeixo màquines per pensar, jugar i ajudar.",
+      "news": "Novetats",
+      "projects": "Projectes",
+      "work": "Feina",
+      "contact": "Contacte",
+      "ars_intro": "El meu laboratori de projectes: domòtica, apps i jocs, IA i divulgació. Duu el nom de la màquina de raonar que Ramon Llull va idear al Puig de Randa, a Algaida, on visc i camino.",
+      "why_link": "Per què el nom?",
+      "ars_link": "Canal de YouTube",
+      "work_text": "Cloud architect i developer a {nagarro}, que abans era {apsl} fins que Nagarro la va comprar. Faig feina amb AWS, GNU/Linux i Python, i m'obsessiona automatitzar: integració contínua, infraestructura com a codi i sistemes que es reparen tot sols.",
+      "contact_text": "Per a col·laboracions, projectes o simplement per saludar:",
+      "back": "Tornar a l'inici",
+      "footer": "Feta «a mà» a Mallorca. Sense galetes ni rastrejadors.",
+      "months": "gen febr març abr maig juny jul ag set oct nov des"
     }
   },
   "news": [
     {
       "date": "2026-10",
+      "url": "https://www.youtube.com/@arsmagna_lab",
       "es": "Nace Ars Magna Lab, con su canal de YouTube.",
       "en": "Ars Magna Lab is born, with its own YouTube channel.",
-      "url": "https://www.youtube.com/@arsmagna_lab"
+      "ca": "Neix Ars Magna Lab, amb el seu canal de YouTube."
     },
     {
       "date": "2026-09",
+      "url": "https://play.google.com/store/apps/details?id=com.ballradar.app",
       "es": "Ball Radar ya está en Google Play.",
       "en": "Ball Radar is out on Google Play.",
-      "url": "https://play.google.com/store/apps/details?id=com.ballradar.app"
+      "ca": "Ball Radar ja és a Google Play."
     },
     {
       "date": "2026-08",
+      "url": "https://www.youtube.com/watch?v=b6ZcncrODek",
       "es": "Bombshot: juegos de fiesta dentro de un Home Assistant Voice PE.",
       "en": "Bombshot: party games inside a Home Assistant Voice PE.",
-      "url": "https://www.youtube.com/watch?v=b6ZcncrODek"
+      "ca": "Bombshot: jocs de festa dins un Home Assistant Voice PE."
     }
   ],
-  "projects": {
-    "list": [
-      {
-        "name": "Ball Radar",
-        "year": "2026",
-        "tags": "Flutter · Android",
-        "es": "Gincana GPS: esconde y encuentra las 7 esferas en el mundo real.",
-        "en": "GPS treasure hunt: hide and find the 7 balls in the real world.",
-        "links": {
-          "Google Play": "https://play.google.com/store/apps/details?id=com.ballradar.app",
-          "Vídeo|Video": "https://www.youtube.com/watch?v=LTOWS466q20"
-        }
-      },
-      {
-        "name": "Bombshot",
-        "year": "2026",
-        "tags": "Home Assistant · Python",
-        "es": "Juegos de fiesta que funcionan enteros dentro de un altavoz de Home Assistant.",
-        "en": "Party games running entirely on a Home Assistant speaker.",
-        "links": {
-          "GitHub": "https://github.com/eduherraiz/bombshot",
-          "Vídeo|Video": "https://www.youtube.com/watch?v=b6ZcncrODek"
-        }
-      },
-      {
-        "name": "Pescando en Mallorca",
-        "tags": "Blog",
-        "es": "Blog familiar de pesca que acabó siendo punto de encuentro de pescadores mallorquines.",
-        "en": "A family fishing blog that became a meeting point for Mallorcan anglers.",
-        "links": {
-          "Web": "https://www.pescandoenmallorca.com"
-        }
-      }
-    ]
+  "projects": [
+    {
+      "name": "Ball Radar",
+      "year": "2026",
+      "tags": "Flutter · Android",
+      "image": "ball-radar.jpg",
+      "es": "Una gincana GPS para jugar al aire libre. Alguien esconde las 7 esferas caminando por un parque o por el barrio, y el resto tiene que encontrarlas guiándose por el radar. Hecha con Flutter para Android.",
+      "en": "A GPS treasure hunt to play outdoors. Someone hides the 7 balls by walking around a park or the neighbourhood, and the others have to find them guided by the radar. Built with Flutter for Android.",
+      "ca": "Una gimcana GPS per jugar a l'aire lliure. Algú amaga les 7 esferes caminant per un parc o pel barri, i la resta les ha de trobar guiant-se pel radar. Feta amb Flutter per a Android.",
+      "links": [
+        [
+          "Google Play",
+          "https://play.google.com/store/apps/details?id=com.ballradar.app"
+        ],
+        [
+          {
+            "es": "Vídeo",
+            "en": "Video",
+            "ca": "Vídeo"
+          },
+          "https://www.youtube.com/watch?v=LTOWS466q20"
+        ]
+      ]
+    },
+    {
+      "name": "Bombshot",
+      "year": "2026",
+      "tags": "Home Assistant · Python",
+      "image": "bombshot.jpg",
+      "es": "Juegos de fiesta que funcionan enteros dentro de un altavoz Home Assistant Voice PE, sin móvil ni pantalla. En la bomba, el altavoz dice un número, empieza un tictac de 30 segundos y hay que deducir qué cable cortar. El Tótem del Chamán es un Simon de cuatro elementos con luces y voz.",
+      "en": "Party games that run entirely on a Home Assistant Voice PE speaker, no phone or screen needed. In the bomb, the speaker says a number, 30 seconds of ticking start and you have to work out which wire to cut. The Shaman's Totem is a four-element Simon with lights and voice.",
+      "ca": "Jocs de festa que funcionen sencers dins un altaveu Home Assistant Voice PE, sense mòbil ni pantalla. A la bomba, l'altaveu diu un nombre, comença un tic-tac de 30 segons i s'ha d'endevinar quin cable tallar. El Tòtem del Xaman és un Simon de quatre elements amb llums i veu.",
+      "links": [
+        [
+          "GitHub",
+          "https://github.com/eduherraiz/bombshot"
+        ],
+        [
+          {
+            "es": "Vídeo",
+            "en": "Video",
+            "ca": "Vídeo"
+          },
+          "https://www.youtube.com/watch?v=b6ZcncrODek"
+        ]
+      ]
+    },
+    {
+      "name": "Pescando en Mallorca",
+      "tags": "Blog",
+      "image": "pescando-en-mallorca.jpg",
+      "es": "Blog familiar de pesca que empezó contando las salidas de nuestro grupo y acabó siendo punto de encuentro de pescadores mallorquines, con crónicas, capturas y técnicas. De esa época vienen también los primeros vídeos del canal.",
+      "en": "A family fishing blog that started as the log of our fishing group and became a meeting point for Mallorcan anglers, with trip reports, catches and techniques. The channel's first videos come from those days too.",
+      "ca": "Blog familiar de pesca que va començar contant les sortides del nostre grup i va acabar essent punt de trobada de pescadors mallorquins, amb cròniques, captures i tècniques. D'aquella època també vénen els primers vídeos del canal.",
+      "links": [
+        [
+          "Web",
+          "https://www.pescandoenmallorca.com"
+        ]
+      ]
+    }
+  ],
+  "name_page": {
+    "es": {
+      "title": "¿Por qué Ars Magna Lab?",
+      "lead": "En 1274, Ramon Llull subió al Puig de Randa y bajó con una idea muy rara para su época: una máquina para razonar.",
+      "body": [
+        "Llull (c. 1232–1316) fue un filósofo, escritor y místico mallorquín. Según contó él mismo, en la cima de Randa tuvo la iluminación de un método al que llamó Art: un sistema para combinar unos pocos principios y, a partir de ellos, llegar a la verdad sobre cualquier tema. Lo reescribió durante toda su vida. La versión final, el Ars generalis ultima, es la que conocemos como Ars Magna.",
+        "El truco eran las letras y los círculos. En esa versión, nueve principios se representan con las letras B a K y se colocan en círculos concéntricos de papel que giran. Al girarlos van saliendo todas las combinaciones posibles, de forma mecánica, sin depender de la inspiración de quien las mira. Es una de las primeras ideas de un procedimiento automático para generar razonamientos.",
+        "Cuatro siglos después, Leibniz lo leyó, escribió su Dissertatio de arte combinatoria (1666) y soñó con un cálculo capaz de zanjar cualquier discusión haciendo cuentas. Por eso a Llull se le cita a menudo entre los precursores lejanos de la informática."
+      ],
+      "lab_title": "¿Y el «Lab»?",
+      "lab": [
+        "Aquí es donde construyo mis máquinas: domótica, apps, juegos e IA. No son ruedas de papel, pero la idea es la misma: combinar piezas sencillas para que una máquina piense, juegue o ayude.",
+        "Y como el Puig de Randa está en Algaida, donde vivo y ando, el nombre casi se eligió solo. El emblema es la Figura A de Llull redibujada: las nueve letras, las líneas que las unen y los anillos que giran."
+      ]
+    },
+    "en": {
+      "title": "Why Ars Magna Lab?",
+      "lead": "In 1274, Ramon Llull climbed Puig de Randa and came down with an idea that was very strange for its time: a machine for reasoning.",
+      "body": [
+        "Llull (c. 1232–1316) was a Mallorcan philosopher, writer and mystic. By his own account, on top of Randa he had the illumination of a method he called the Art: a system for combining a few principles and, from them, reaching the truth about any subject. He kept rewriting it all his life. The final version, the Ars generalis ultima, is the one known as the Ars Magna.",
+        "The trick was letters and circles. In that version, nine principles are represented by the letters B to K and placed on concentric paper circles that rotate. Turning them produces every possible combination, mechanically, without relying on the inspiration of whoever is looking. It is one of the earliest ideas of an automatic procedure for generating arguments.",
+        "Four centuries later Leibniz read him, wrote his Dissertatio de arte combinatoria (1666) and dreamed of a calculus that could settle any dispute by doing sums. That is why Llull is often named among the distant forerunners of computing."
+      ],
+      "lab_title": "And the “Lab”?",
+      "lab": [
+        "This is where I build my machines: home automation, apps, games and AI. They are not paper wheels, but the idea is the same: combine simple pieces so a machine can think, play or help.",
+        "And since Puig de Randa is in Algaida, where I live and roam, the name almost picked itself. The emblem is Llull's Figure A redrawn: the nine letters, the lines joining them and the rotating rings."
+      ]
+    },
+    "ca": {
+      "title": "Per què Ars Magna Lab?",
+      "lead": "El 1274, Ramon Llull va pujar al Puig de Randa i en va baixar amb una idea molt estranya per a la seva època: una màquina per raonar.",
+      "body": [
+        "Llull (c. 1232–1316) va ser un filòsof, escriptor i místic mallorquí. Segons va contar ell mateix, al cim de Randa va tenir la il·luminació d'un mètode que va anomenar Art: un sistema per combinar uns pocs principis i, a partir d'ells, arribar a la veritat sobre qualsevol tema. El va reescriure tota la vida. La versió final, l'Ars generalis ultima, és la que coneixem com a Ars Magna.",
+        "El truc eren les lletres i els cercles. En aquesta versió, nou principis es representen amb les lletres B a K i es col·loquen en cercles concèntrics de paper que giren. En girar-los van sortint totes les combinacions possibles, de manera mecànica, sense dependre de la inspiració de qui les mira. És una de les primeres idees d'un procediment automàtic per generar raonaments.",
+        "Quatre segles després, Leibniz el va llegir, va escriure la seva Dissertatio de arte combinatoria (1666) i va somiar un càlcul capaç de resoldre qualsevol discussió fent comptes. Per això sovint es cita Llull entre els precursors llunyans de la informàtica."
+      ],
+      "lab_title": "I el «Lab»?",
+      "lab": [
+        "Aquí és on construeixo les meves màquines: domòtica, apps, jocs i IA. No són rodes de paper, però la idea és la mateixa: combinar peces senzilles perquè una màquina pensi, jugui o ajudi.",
+        "I com que el Puig de Randa és a Algaida, on visc i camino, el nom gairebé es va triar tot sol. L'emblema és la Figura A de Llull redibuixada: les nou lletres, les línies que les uneixen i els anells que giren."
+      ]
+    }
+  },
+  "work_links": {
+    "nagarro": {
+      "es": "https://www.nagarro.com/es",
+      "en": "https://www.nagarro.com/en",
+      "ca": "https://www.nagarro.com/es"
+    },
+    "apsl": {
+      "es": "https://apsl.tech/es/",
+      "en": "https://apsl.tech/en/",
+      "ca": "https://apsl.tech/es/"
+    }
   }
 }
