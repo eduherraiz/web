@@ -9,7 +9,8 @@
   "links": {
     "github": "https://github.com/eduherraiz",
     "linkedin": "https://www.linkedin.com/in/edu-herraiz-27b81130",
-    "youtube": "https://www.youtube.com/@arsmagna_lab"
+    "youtube": "https://www.youtube.com/@arsmagna_lab",
+    "ars_github": "https://github.com/ars-magna-lab"
   },
   "ui": {
     "es": {
@@ -27,7 +28,8 @@
       "contact_text": "Para colaboraciones, proyectos o simplemente saludar:",
       "back": "Volver al inicio",
       "footer": "Hecha «a mano» en Mallorca. Sin cookies ni rastreadores.",
-      "months": "ene feb mar abr may jun jul ago sep oct nov dic"
+      "months": "ene feb mar abr may jun jul ago sep oct nov dic",
+      "ars_github_link": "Proyectos en GitHub"
     },
     "en": {
       "title": "Edu Herraiz · Cloud architect and developer in Mallorca",
@@ -44,7 +46,8 @@
       "contact_text": "For collaborations, projects or just to say hi:",
       "back": "Back to home",
       "footer": "“Handmade” in Mallorca. No cookies, no trackers.",
-      "months": "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec"
+      "months": "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec",
+      "ars_github_link": "Projects on GitHub"
     },
     "ca": {
       "title": "Edu Herraiz · Cloud architect i developer a Mallorca",
@@ -61,10 +64,18 @@
       "contact_text": "Per a col·laboracions, projectes o simplement per saludar:",
       "back": "Tornar a l'inici",
       "footer": "Feta «a mà» a Mallorca. Sense galetes ni rastrejadors.",
-      "months": "gen febr març abr maig juny jul ag set oct nov des"
+      "months": "gen febr març abr maig juny jul ag set oct nov des",
+      "ars_github_link": "Projectes a GitHub"
     }
   },
   "news": [
+    {
+      "date": "2026-10",
+      "url": "https://ars-domus.arsmagnalab.com",
+      "es": "Ars Domus: tu casa en 3D con Claude Code y three.js, con demo y código abierto.",
+      "en": "Ars Domus: your house in 3D with Claude Code and three.js, with a demo and open source code.",
+      "ca": "Ars Domus: ca teva en 3D amb Claude Code i three.js, amb demo i codi obert."
+    },
     {
       "date": "2026-10",
       "url": "https://www.youtube.com/@arsmagna_lab",
@@ -88,6 +99,25 @@
     }
   ],
   "projects": [
+    {
+      "name": "Ars Domus",
+      "year": "2026",
+      "tags": "three.js · Claude Code",
+      "image": "ars-domus.jpg",
+      "es": "Tu casa en 3D a partir de un plano, unas fotos y datos públicos del terreno, para pasearla en el navegador. Guarda la casa actual y una propuesta de reforma, y se cambia de una a otra sin mover la cámara. Nada se modela a mano: Claude Code convierte las fuentes en datos y three.js los dibuja.",
+      "en": "Your house in 3D from a floor plan, some photos and public land data, to walk around in the browser. It keeps the current house and a renovation proposal, and you switch between them without moving the camera. Nothing is modelled by hand: Claude Code turns the sources into data and three.js draws them.",
+      "ca": "Ca teva en 3D a partir d'un plànol, unes fotos i dades públiques del terreny, per passejar-hi dins el navegador. Guarda la casa actual i una proposta de reforma, i es canvia d'una a l'altra sense moure la càmera. No es modela res a mà: Claude Code converteix les fonts en dades i three.js les dibuixa.",
+      "links": [
+        [
+          "Demo",
+          "https://ars-domus.arsmagnalab.com"
+        ],
+        [
+          "GitHub",
+          "https://github.com/ars-magna-lab/ars-domus"
+        ]
+      ]
+    },
     {
       "name": "Ball Radar",
       "year": "2026",
