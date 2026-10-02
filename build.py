@@ -100,7 +100,7 @@ def project(p, lang, prefix):
     meta = " · ".join(x for x in [p.get("year", ""), t(p.get("tags", ""), lang)] if x)
     links = " ".join(f'{ext(u)}{escape(t(k, lang))}</a>' for k, u in p["links"])
     img = (f'<a class="thumb" href="{escape(p["links"][0][1])}" rel="noopener" tabindex="-1">'
-           f'<img src="{prefix}assets/projects/{p["image"]}" width="160" height="120" alt="" loading="lazy"></a>') if p.get("image") else ""
+           f'<img src="{prefix}assets/projects/{p["image"]}" width="176" height="99" alt="" loading="lazy"></a>') if p.get("image") else ""
     return f"""      <li class="proj">
         {img}
         <div>
