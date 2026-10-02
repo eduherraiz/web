@@ -20,7 +20,6 @@
       "oss": "Código abierto",
       "work": "Trabajo",
       "contact": "Contacto",
-      "private": "privado",
       "ars_intro": "Mi laboratorio de proyectos: domótica, apps y juegos, IA y divulgación. Lleva el nombre de la máquina de razonar que Ramon Llull ideó en el Puig de Randa, en Algaida.",
       "ars_link": "Canal de YouTube",
       "work_text": "Cloud architect y developer en Nagarro. Antes, sistemas y desarrollo web en APSL. Trabajo con AWS, GNU/Linux y Python, y me obsesiona automatizar: integración continua, infraestructura como código y sistemas que se reparan solos.",
@@ -40,7 +39,6 @@
       "oss": "Open source",
       "work": "Work",
       "contact": "Contact",
-      "private": "private",
       "ars_intro": "My project lab: home automation, apps and games, AI and science communication. Named after the reasoning machine Ramon Llull conceived on Puig de Randa, in Algaida.",
       "ars_link": "YouTube channel",
       "work_text": "Cloud architect and developer at Nagarro. Previously systems and web development at APSL. I work with AWS, GNU/Linux and Python, and I'm obsessed with automation: continuous integration, infrastructure as code and self-healing systems.",
@@ -91,13 +89,6 @@
           "GitHub": "https://github.com/eduherraiz/bombshot",
           "Vídeo|Video": "https://www.youtube.com/watch?v=b6ZcncrODek"
         }
-      },
-      {
-        "name": "Homelab",
-        "tags": "Home Assistant · Frigate",
-        "private": true,
-        "es": "La domótica, la red y los servicios de casa, todo como código.",
-        "en": "Home automation, network and home services, all as code."
       }
     ],
     "before": [

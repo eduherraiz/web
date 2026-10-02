@@ -45,12 +45,9 @@ def date(d, lang, ui):
 
 def project(p, lang, ui):
     meta = " · ".join(x for x in [p.get("year", ""), pick(p.get("tags", ""), lang)] if x)
-    flags = ""
-    if p.get("private"):
-        flags = f' <span class="flag">{ui["private"]}</span>'
     links = " ".join(f'{ext(u)}{escape(pick(k, lang))}</a>' for k, u in p.get("links", {}).items())
     return f"""      <li class="proj">
-        <div class="proj-head"><h4>{escape(pick(p["name"], lang))}{flags}</h4><span class="meta">{escape(meta)}</span></div>
+        <div class="proj-head"><h4>{escape(pick(p["name"], lang))}</h4><span class="meta">{escape(meta)}</span></div>
         <p>{escape(p[lang])}</p>{f'<p class="links">{links}</p>' if links else ''}
       </li>"""
 
