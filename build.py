@@ -105,7 +105,7 @@ def page(c, lang):
   </header>
 
   <section class="ars">
-    <h2>{wheel()}<span>Ars Magna</span></h2>
+    <h2>{wheel()}<span>Ars Magna Lab</span></h2>
     <p>{escape(ui["ars_intro"])} {ext(L["youtube"])}{ui["ars_link"]} →</a></p>
     <h3>{ui["news"]}</h3>
     <ul class="news">
