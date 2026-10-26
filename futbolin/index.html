@@ -63,7 +63,8 @@ h1 small { display: block; font-size: .42em; letter-spacing: 2px; color: var(--m
 .slot b { display: block; font: 700 20px var(--display); letter-spacing: 2px; color: var(--gold); margin-bottom: 4px; }
 .slot.vertical { aspect-ratio: 3 / 4; }
 figure.media { margin: 0; }
-figure.media img, figure.media video { width: 100%; border-radius: 12px; }
+figure.media img, figure.media video { width: 100%; height: auto; border-radius: 12px; }
+figure.media.vertical video { width: auto; max-width: 100%; max-height: 560px; margin: 0 auto; }
 figcaption { font-size: 14px; color: var(--muted); margin-top: 8px; }
 
 /* Secciones */
@@ -207,11 +208,11 @@ footer { padding: 40px 0 56px; text-align: center; color: var(--muted); font-siz
         </ul>
         <p class="nota">El ábaco de cuentas rojas y azules sigue en su sitio, por si acaso.</p>
       </div>
-      <figure class="slot vertical" data-toma="F1"><div><b>F1 · El futbolín entero</b>De tres cuartos, con el tablero cerrado y buena luz.</div></figure>
+      <figure class="media"><img src="media/futbolin.webp" width="1600" height="900" alt="El futbolín Córdoba restaurado, negro, con los muñecos blancos y granates" loading="lazy"><figcaption>El Córdoba, ya restaurado. Por fuera no se ve nada nuevo.</figcaption></figure>
     </div>
     <div class="grid-media dos">
-      <figure class="slot" data-toma="F5"><div><b>F5 · La portería por fuera</b>Para que se vea que no hay nada.</div></figure>
-      <figure class="slot" data-toma="F10"><div><b>F10 · Antes de la restauración</b>Si hay alguna foto.</div></figure>
+      <figure class="media"><img src="media/placa.webp" width="1600" height="900" alt="Placa de latón de la Delegación de Industria de Barcelona: marca Justo A. Córdoba, fútbol de salón, tipo mesa, aprobado en 1950" loading="lazy"><figcaption>La placa original: «fútbol de salón», tipo mesa, aprobado por la Dirección General de Seguridad en 1950.</figcaption></figure>
+      <figure class="media"><img src="media/antes.webp" width="1600" height="1200" alt="El mismo futbolín antes de restaurarlo, pintado de rojo y con los muñecos gastados" loading="lazy"><figcaption>Así estaba en 2022, antes de restaurarlo.</figcaption></figure>
     </div>
   </div>
 </section>
@@ -264,8 +265,8 @@ footer { padding: 40px 0 56px; text-align: center; color: var(--muted); font-siz
     <figure class="lamina"><a href="diagramas/barrera-ir.svg" aria-label="Abrir el diagrama a tamaño completo"><img src="diagramas/barrera-ir.svg" width="760" height="285" alt="Corte del carril con el emisor y el receptor a cada lado de la bola, y la señal en el GPIO 32: el haz se corta unos 35 ms con el gol, el bloqueo de 400 ms ignora los rebotes y los cortes muy cortos se descartan como ruido" loading="lazy"></a><figcaption>La barrera vista de frente y la señal que llega al ESP32 con un gol.</figcaption></figure>
 
     <div class="grid-media dos">
-      <figure class="slot" data-toma="F4"><div><b>F4 · Las cuñas y la barrera</b>De cerca, y otra con una bola pasando.</div></figure>
-      <figure class="slot" data-toma="V2"><div><b>V2 · La bola corta el haz</b>En cámara superlenta.</div></figure>
+      <figure class="media"><img src="media/carril.webp" width="1600" height="900" alt="El carril de recogida con las dos cuñas de madera pegadas a las paredes y los sensores detrás" loading="lazy"><figcaption>Las dos cuñas en el carril, con un sensor detrás de cada una.</figcaption></figure>
+      <figure class="media vertical"><video src="media/carril.mp4" poster="media/carril-poster.jpg" width="720" height="1280" autoplay muted loop playsinline preload="metadata" aria-label="Una bola rueda por el carril y pasa entre las dos cuñas"></video><figcaption>La bola pasa entre las cuñas y corta el haz. A velocidad real.</figcaption></figure>
     </div>
   </div>
 </section>
@@ -350,7 +351,7 @@ footer { padding: 40px 0 56px; text-align: center; color: var(--muted); font-siz
         <h3>El locutor</h3>
         <p>Cada gol lo canta un locutor que sigue el partido: el primer gol, el empate, la racha, la remontada, la bola de partido, el gol que salva el partido… Son <b>348 locuciones</b> generadas de antemano con una voz TTS de OpenAI. HA calcula el momento del partido como atributo de un sensor y el dashboard elige una frase al azar, sin repetir la anterior.</p>
       </div>
-      <figure class="slot vertical" data-toma="F8"><div><b>F8 · La tablet junto al futbolín</b>Con el marcador en pantalla.</div></figure>
+      <figure class="media"><img src="media/tablet.webp" width="1600" height="900" alt="La tablet con el marcador a 0-0, apoyada en el futbolín junto al ábaco" loading="lazy"><figcaption>El marcador en la tablet, al lado del ábaco de toda la vida.</figcaption></figure>
     </div>
     <div class="narrow">
       <h3>El truco de la música</h3>
@@ -360,7 +361,7 @@ footer { padding: 40px 0 56px; text-align: center; color: var(--muted); font-siz
     <div class="grid-media tres">
       <figure class="slot" data-toma="V8"><div><b>V8 · El marcador en pantalla</b>Grabación de la tablet, sin barra de direcciones.</div></figure>
       <figure class="slot" data-toma="V6"><div><b>V6 · La música se aparta</b>Con música libre de derechos.</div></figure>
-      <figure class="slot" data-toma="F9"><div><b>F9 · Analógico y digital</b>El ábaco y la tablet juntos.</div></figure>
+      <figure class="media"><img src="media/partida.webp" width="1600" height="900" alt="Partida en juego con la tablet marcando 2-1" loading="lazy"><figcaption>Partida en juego: 2-1 para el Madrid.</figcaption></figure>
     </div>
   </div>
 </section>
@@ -439,9 +440,9 @@ footer { padding: 40px 0 56px; text-align: center; color: var(--muted); font-siz
     </div>
     <figure class="lamina"><a href="diagramas/alimentacion-cableado.svg" aria-label="Abrir el diagrama a tamaño completo"><img src="diagramas/alimentacion-cableado.svg" width="760" height="390" alt="Cableado de las baterías: cada una con su portafusibles de 5 A, los dos positivos al interruptor y de ahí a las clemas de 12 V, que reparten a Gledopto, buck e interfaz; los negativos a la clema de GND" loading="lazy"></a><figcaption>Cada batería lleva su fusible junto al borne y los dos positivos se unen en el interruptor.</figcaption></figure>
     <div class="grid-media tres">
-      <figure class="slot" data-toma="F3"><div><b>F3 · El interior</b>Con el tablero abatido: un plano general.</div></figure>
-      <figure class="slot" data-toma="F6"><div><b>F6 · El panel de electrónica</b>ESP32, buck y clemas.</div></figure>
-      <figure class="slot" data-toma="F7"><div><b>F7 · Controlador e interruptor</b>Debajo del mueble.</div></figure>
+      <figure class="media"><img src="media/interior.webp" width="1600" height="900" alt="El futbolín con el tablero de juego abatido y la electrónica dentro del mueble" loading="lazy"><figcaption>Con el tablero levantado: todo cabe dentro del mueble.</figcaption></figure>
+      <figure class="media"><img src="media/electronica.webp" width="1600" height="900" alt="La caja de la electrónica, con el ESP32 en su placa de bornas, el buck y las conexiones" loading="lazy"><figcaption>El ESP32 en su placa de bornas, el buck y las conexiones de las barreras.</figcaption></figure>
+      <figure class="media"><img src="media/baterias.webp" width="1600" height="900" alt="Las dos baterías de plomo y el controlador Gledopto dentro de una caja azul" loading="lazy"><figcaption>Las dos baterías, con sus fusibles, y el Gledopto.</figcaption></figure>
     </div>
   </div>
 </section>

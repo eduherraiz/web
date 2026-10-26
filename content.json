@@ -108,6 +108,7 @@
       },
       "year": "2026",
       "tags": "ESPHome · WLED · Home Assistant",
+      "image": "futbolin.jpg",
       "es": "Un futbolín Córdoba antiguo y restaurado que cuenta los goles solo. Unas barreras de infrarrojos en los carriles avisan a un ESP32 que lleva la partida, y Home Assistant la convierte en un marcador de estadio en la tablet, con locutor, música y control por voz. Las tiras LED celebran cada gol. Todo va a batería y escondido en el mueble, sin tocar la portería.",
       "en": "An old, restored Córdoba foosball table that keeps score by itself. Infrared beams in the ball return lanes tell an ESP32 that runs the match, and Home Assistant turns it into a stadium scoreboard on a tablet, with a commentator, music and voice control. LED strips celebrate every goal. It all runs on batteries, hidden inside the cabinet, without touching the goals.",
       "ca": "Un futbolí Córdoba antic i restaurat que compta els gols tot sol. Unes barreres d'infrarojos als carrils avisen un ESP32 que du la partida, i Home Assistant la converteix en un marcador d'estadi a la tauleta, amb locutor, música i control per veu. Les tires LED celebren cada gol. Tot va amb bateria i amagat dins el moble, sense tocar la porteria.",
