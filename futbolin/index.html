@@ -356,7 +356,8 @@ footer { padding: 40px 0 56px; text-align: center; color: var(--muted); font-siz
       <div>
         <p>El marcador es un panel de Home Assistant en una tablet que se pone al lado del futbolín al jugar: los goles en grande, las bolas que quedan, la bola de partido, «la buena» y la batería.</p>
         <h3>El locutor</h3>
-        <p>Cada gol lo canta un locutor con una frase distinta: el primer gol, el empate, la remontada, la bola de partido, la goleada… <b>164 frases</b> grabadas de antemano con una voz sintética de OpenAI que hace de narrador deportivo, con un jugador al azar en cada una. Al empezar, presenta el clásico.</p>
+        <p>Cada gol lo canta un locutor que sigue el partido: el primer gol, el empate, la racha de tres seguidos, el que se escapa, la remontada, la bola de partido, el que salva el partido cuando el rival ya tenía cinco… <b>Más de 300 frases</b> grabadas de antemano con una voz sintética de OpenAI que hace de narrador deportivo, con un jugador al azar en cada una y sin repetir frase dos goles seguidos. Al empezar, presenta el clásico.</p>
+        <p>Y de vez en cuando, en un gol sin importancia, se le escapa algo corto: «¡Pum!», «¡Para casa!», «¡Toma castaña!».</p>
         <h3>La música que se aparta</h3>
         <p>Con música sonando en la tablet, cada vez que habla el locutor la música baja y luego vuelve. Parece lo más fácil del proyecto y fue de lo más puñetero: con una locución de más de 5 segundos, Android pausaba la música para siempre. El truco es un segundo de silencio en bucle que pide permiso «para un momento» mientras la voz suena por otro lado.</p>
       </div>
@@ -413,7 +414,7 @@ footer { padding: 40px 0 56px; text-align: center; color: var(--muted); font-siz
     <p class="num">08</p>
     <h2>Todo escondido y a batería</h2>
     <div class="narrow">
-      <p>Otra condición: jugar sin cables. Un cable cruzando el garaje no aguanta una partida. Por eso todo va a batería: dos baterías de 12 V que ya había en casa, en paralelo, con unas <b>7 horas</b> de juego. Se sacan para cargarlas y, si hace falta, en su lugar se enchufa una fuente.</p>
+      <p>Otra condición: jugar sin cables. Un cable cruzando el garaje no aguanta una partida. Por eso todo va a batería: dos baterías de 12 V que ya había en casa, en paralelo. Según las cuentas, dan para unas <b>7 horas</b> de juego; falta medirlo de verdad. Se sacan para cargarlas y, si hace falta, en su lugar se enchufa una fuente.</p>
     </div>
     <div class="diagrama" role="img" aria-label="Alimentación: dos baterías de 12 voltios con fusible, interruptor general, bus de 12 voltios para las tiras y un convertidor a 5 voltios para el ESP32 y las barreras">
       <svg viewBox="0 0 760 210">
@@ -451,8 +452,8 @@ footer { padding: 40px 0 56px; text-align: center; color: var(--muted); font-siz
     </ul>
     <div class="cifras">
       <div class="cifra"><b>31</b><span>goles en las primeras partidas, sin un fallo</span></div>
-      <div class="cifra"><b>164</b><span>frases del locutor</span></div>
-      <div class="cifra"><b>~7 h</b><span>de juego con batería</span></div>
+      <div class="cifra"><b>300+</b><span>frases del locutor</span></div>
+      <div class="cifra"><b>~7 h</b><span>de juego con batería, según las cuentas</span></div>
       <div class="cifra"><b>0</b><span>taladros en la portería</span></div>
     </div>
   </div>
@@ -521,7 +522,9 @@ footer { padding: 40px 0 56px; text-align: center; color: var(--muted); font-siz
   const sim = luces(["sim-arriba", "sim-abajo"]);
   const $ = id => document.getElementById(id);
   const nombre = { a: "Madrid", b: "Barça" };
-  const azar = l => l[Math.floor(Math.random() * l.length)];
+  // sin repetir la frase anterior, como el locutor de verdad
+  let ultima = "";
+  const azar = l => { const op = l.length > 1 ? l.filter(x => x !== ultima) : l; return (ultima = op[Math.floor(Math.random() * op.length)]); };
   const NUM = ["cero", "uno", "dos", "tres", "cuatro", "cinco", "seis"];
   const FRASES = {
     inicio: ["¡Buenas tardes y bienvenidos al garaje! Hoy se juega el clásico. Once bolas, gana quien llegue a seis. ¡Que ruede el balón!",
@@ -536,6 +539,7 @@ footer { padding: 40px 0 56px; text-align: center; color: var(--muted); font-siz
     fin: ["¡Se acabó! ¡Gana el {e} seis a {r}!", "¡Final del partido! ¡Victoria del {e}, seis a {r}!"],
     fin5: ["¡En la buena! ¡Gana el {e} seis a cinco! ¡Qué final!", "¡La buena es del {e}! ¡Seis a cinco!"],
     goleada: ["¡Goleada! ¡Seis a {r}! ¡Paseo del {e}!", "¡Seis a {r}! ¡Esto ha sido un baile!"],
+    corta: ["¡Pum!", "¡Para casa!", "¡Toma castaña!"],
     acabada: ["La partida ya está decidida: las bolas que sobran no cuentan."],
   };
   let g, fin;
@@ -583,7 +587,7 @@ footer { padding: 40px 0 56px; text-align: center; color: var(--muted); font-siz
       setTimeout(() => { if (!fin && g[e] === 5) sim(efectos.latido(COL[e])); }, 1500);
     } else {
       pintar(g.a + " – " + g.b);
-      decir(g.a + g.b === 1 ? "primero" : g.a === g.b ? "empate" : "normal", e);
+      decir(g.a + g.b === 1 ? "primero" : g.a === g.b ? "empate" : Math.random() < .25 ? "corta" : "normal", e);
       sim(efectos.ola(COL[e], e));
     }
   }
