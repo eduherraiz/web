@@ -56,12 +56,8 @@ h1 small { display: block; font-size: .42em; letter-spacing: 2px; color: var(--m
 .lead b { color: var(--ink); font-weight: 500; }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 0 0 36px; }
 .chips span { font: 500 13px var(--mono); color: var(--teal); border: 1px solid color-mix(in srgb, var(--teal) 45%, transparent); padding: 4px 10px; border-radius: 99px; }
-.hero .slot { max-width: 860px; margin: 0 auto; }
+.hero-foto { max-width: 900px; margin: 0 auto; }
 
-/* Huecos para las tomas de Edu */
-.slot { margin: 0; aspect-ratio: 16 / 9; border: 2px dashed #39405a; border-radius: 12px; display: grid; place-items: center; text-align: center; padding: 18px; background: repeating-linear-gradient(-45deg, #11131b 0 14px, #141722 14px 28px); color: var(--muted); font-size: 14px; line-height: 1.45; }
-.slot b { display: block; font: 700 20px var(--display); letter-spacing: 2px; color: var(--gold); margin-bottom: 4px; }
-.slot.vertical { aspect-ratio: 3 / 4; }
 figure.media { margin: 0; }
 figure.media img, figure.media video { width: 100%; height: auto; border-radius: 12px; }
 figure.media.vertical video { width: auto; max-width: 100%; max-height: 560px; margin: 0 auto; }
@@ -169,7 +165,7 @@ footer { padding: 40px 0 56px; text-align: center; color: var(--muted); font-siz
   <h1>Domotizando un <em>futbolín</em><small>(con Home Assistant)</small></h1>
   <p class="lead">Barreras de infrarrojos en los carriles de recogida y un <b>ESP32 con ESPHome</b> que lleva la partida. El marcador es un <b>dashboard</b> en la tablet, con locutor y música, se controla por voz con <b>Assist</b> y los goles se celebran con <b>WLED</b>. Va a batería, escondido en el mueble, y la portería no se ha tocado.</p>
   <div class="chips"><span>ESPHome</span><span>WLED</span><span>Assist</span><span>Dashboard</span><span>ESP32</span><span>Barreras IR</span></div>
-  <figure class="slot" data-toma="V1"><div><b>V1 · Un gol de principio a fin</b>Tiro, ola de luz, marcador y locutor en una sola toma. Bucle de 8–10 s con sonido.</div></figure>
+  <figure class="media hero-foto"><img src="media/partida.webp" width="1600" height="900" alt="El futbolín en plena partida, con la tablet al lado marcando 2-1"></figure>
 </header>
 
 <section class="alt">
@@ -185,10 +181,6 @@ footer { padding: 40px 0 56px; text-align: center; color: var(--muted); font-siz
       <div class="momento"><b>Bola de partido</b><p>Al llegar a 5, las tiras respiran en el color de quien la tiene.</p><code>bola_partido_a</code></div>
       <div class="momento oro"><b>La buena</b><p>5-5: duelo de olas, latido dorado y cartel en el marcador.</p><code>la_buena</code></div>
       <div class="momento"><b>Victoria</b><p>Fiesta de luces y pantalla del ganador. Los goles que sobran ya no cuentan.</p><code>fin_a</code></div>
-    </div>
-    <div class="grid-media dos">
-      <figure class="slot" data-toma="V3"><div><b>V3 · «Nueva partida»</b>Se dice en voz alta y suena la presentación del clásico.</div></figure>
-      <figure class="slot" data-toma="V4"><div><b>V4 · La buena y la victoria</b>El 5-5 en dorado y el gol que gana, con la fiesta de luces.</div></figure>
     </div>
   </div>
 </section>
@@ -210,9 +202,10 @@ footer { padding: 40px 0 56px; text-align: center; color: var(--muted); font-siz
       </div>
       <figure class="media"><img src="media/futbolin.webp" width="1600" height="900" alt="El futbolín Córdoba restaurado, negro, con los muñecos blancos y granates" loading="lazy"><figcaption>El Córdoba, ya restaurado. Por fuera no se ve nada nuevo.</figcaption></figure>
     </div>
-    <div class="grid-media dos">
+    <div class="grid-media tres">
       <figure class="media"><img src="media/placa.webp" width="1600" height="900" alt="Placa de latón de la Delegación de Industria de Barcelona: marca Justo A. Córdoba, fútbol de salón, tipo mesa, aprobado en 1950" loading="lazy"><figcaption>La placa original: «fútbol de salón», tipo mesa, aprobado por la Dirección General de Seguridad en 1950.</figcaption></figure>
       <figure class="media"><img src="media/antes.webp" width="1600" height="1200" alt="El mismo futbolín antes de restaurarlo, pintado de rojo y con los muñecos gastados" loading="lazy"><figcaption>Así estaba en 2022, antes de restaurarlo.</figcaption></figure>
+      <figure class="media"><img src="media/antes-detalle.webp" width="1600" height="1200" alt="Detalle de los muñecos antes de la restauración, con la pintura gastada" loading="lazy"><figcaption>Los muñecos, con décadas de partidos encima.</figcaption></figure>
     </div>
   </div>
 </section>
@@ -358,11 +351,6 @@ footer { padding: 40px 0 56px; text-align: center; color: var(--muted); font-siz
       <p>Con música sonando en la tablet, el locutor tiene que bajarla y no pararla. Android solo baja la música si el sonido nuevo pide el foco de audio «temporal, se puede bajar», y el WebView solo lo pide así para medios de <b>menos de 5 s</b>. Con una locución más larga, la música se pausaba y no volvía.</p>
       <p>La solución: mientras habla el locutor, suena en bucle un <code>&lt;audio&gt;</code> con 1 s de silencio, que pide el foco corto. La voz va aparte por <b>Web Audio</b>, que no pide foco. Al acabar, se vacía el <code>src</code> del silencio y se llama a <code>load()</code>: con <code>pause()</code> solo, el foco no se suelta y la música se queda baja.</p>
     </div>
-    <div class="grid-media tres">
-      <figure class="slot" data-toma="V8"><div><b>V8 · El marcador en pantalla</b>Grabación de la tablet, sin barra de direcciones.</div></figure>
-      <figure class="slot" data-toma="V6"><div><b>V6 · La música se aparta</b>Con música libre de derechos.</div></figure>
-      <figure class="media"><img src="media/partida.webp" width="1600" height="900" alt="Partida en juego con la tablet marcando 2-1" loading="lazy"><figcaption>Partida en juego: 2-1 para el Madrid.</figcaption></figure>
-    </div>
   </div>
 </section>
 
@@ -393,7 +381,6 @@ footer { padding: 40px 0 56px; text-align: center; color: var(--muted); font-siz
           <tr><td>«Anula la partida»</td><td>Vuelta a reposo</td></tr>
           <tr><td>«Pon la música»</td><td>Música en la tablet</td></tr>
         </table></div>
-        <figure class="slot" data-toma="V5"><div><b>V5 · Una corrección por voz</b>«Quita un gol al Barça» y el marcador obedece.</div></figure>
       </div>
     </div>
   </div>
@@ -403,12 +390,9 @@ footer { padding: 40px 0 56px; text-align: center; color: var(--muted); font-siz
   <div class="wrap">
     <p class="num">08</p>
     <h2>Luces con WLED</h2>
-    <div class="dos">
-      <div>
-        <p>Hay una tira LED a cada lado del campo (WS2811 de 12 V, 28 píxeles cada una), movidas por un controlador Gledopto con WLED. Cada tira es un segmento. A batería gastan demasiado para ir encendidas toda la partida, así que solo hacen efectos de unos segundos y vuelven a apagarse solas.</p>
-        <p>Cada momento es un preset (o una playlist de presets) que el ESP32 lanza por la API JSON. Los presets salen de un script generador, así que se versionan con el resto del código.</p>
-      </div>
-      <figure class="slot" data-toma="F2"><div><b>F2 · Las tiras encendidas</b>El mismo plano de F1, en penumbra y con la fiesta de luces.</div></figure>
+    <div class="narrow">
+      <p>Hay una tira LED a cada lado del campo (WS2811 de 12 V, 28 píxeles cada una), movidas por un controlador Gledopto con WLED. Cada tira es un segmento. A batería gastan demasiado para ir encendidas toda la partida, así que solo hacen efectos de unos segundos y vuelven a apagarse solas.</p>
+      <p>Cada momento es un preset (o una playlist de presets) que el ESP32 lanza por la API JSON. Los presets salen de un script generador, así que se versionan con el resto del código.</p>
     </div>
     <figure class="lamina"><a href="diagramas/tiras-conexion.svg" aria-label="Abrir el diagrama a tamaño completo"><img src="diagramas/tiras-conexion.svg" width="760" height="242" alt="El bus de 12 V alimenta el Gledopto con WLED, que tiene dos salidas: la tira A en el GPIO 16 (píxeles 0 a 27) y la tira B en el GPIO 2 (píxeles 28 a 55)" loading="lazy"></a><figcaption>Cada tira va a su propia salida del Gledopto y es un segmento de WLED.</figcaption></figure>
     <div class="tabla"><table>
@@ -439,10 +423,11 @@ footer { padding: 40px 0 56px; text-align: center; color: var(--muted); font-siz
       <p>Son dos baterías de plomo de 12 V y 7 Ah en paralelo, cada una con su fusible de 5 A, y un interruptor general por debajo del mueble. Según las cuentas, dan para <b>unas 7 horas</b> de juego (falta medirlo). Para jugar enchufado, se quitan las baterías y se conecta una fuente de 12 V en su lugar.</p>
     </div>
     <figure class="lamina"><a href="diagramas/alimentacion-cableado.svg" aria-label="Abrir el diagrama a tamaño completo"><img src="diagramas/alimentacion-cableado.svg" width="760" height="390" alt="Cableado de las baterías: cada una con su portafusibles de 5 A, los dos positivos al interruptor y de ahí a las clemas de 12 V, que reparten a Gledopto, buck e interfaz; los negativos a la clema de GND" loading="lazy"></a><figcaption>Cada batería lleva su fusible junto al borne y los dos positivos se unen en el interruptor.</figcaption></figure>
-    <div class="grid-media tres">
+    <div class="grid-media dos">
       <figure class="media"><img src="media/interior.webp" width="1600" height="900" alt="El futbolín con el tablero de juego abatido y la electrónica dentro del mueble" loading="lazy"><figcaption>Con el tablero levantado: todo cabe dentro del mueble.</figcaption></figure>
       <figure class="media"><img src="media/electronica.webp" width="1600" height="900" alt="La caja de la electrónica, con el ESP32 en su placa de bornas, el buck y las conexiones" loading="lazy"><figcaption>El ESP32 en su placa de bornas, el buck y las conexiones de las barreras.</figcaption></figure>
       <figure class="media"><img src="media/baterias.webp" width="1600" height="900" alt="Las dos baterías de plomo y el controlador Gledopto dentro de una caja azul" loading="lazy"><figcaption>Las dos baterías, con sus fusibles, y el Gledopto.</figcaption></figure>
+      <figure class="media"><img src="media/interruptor.webp" width="1600" height="900" alt="El interruptor general, un pulsador redondo con anillo rojo atornillado por debajo del mueble" loading="lazy"><figcaption>El interruptor general: todo se enciende desde debajo del mueble.</figcaption></figure>
     </div>
   </div>
 </section>
