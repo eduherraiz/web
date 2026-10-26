@@ -7,6 +7,8 @@ Output, per language (es at the root, the others under /<lang>/):
   index.html                 home
   ars-magna-lab/index.html   why the name
 
+futbolin/index.html is written by hand (Spanish only) and not generated here.
+
 Only live projects are listed: an entry without links is skipped. When a
 project's site dies, point it to its repo instead of removing it.
 Texts are {"es": ..., "en": ..., "ca": ...} or a plain string when they don't change.

@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El futbolín que canta los goles · Edu Herraiz</title>
+<meta name="description" content="Un futbolín Córdoba de toda la vida que cuenta los goles solo, los canta con locutor y los celebra con luces. Con ESPHome, WLED y Home Assistant, a batería y sin tocar la portería.">
+<meta name="author" content="Edu Herraiz">
+<link rel="canonical" href="https://www.eduherraiz.com/futbolin/">
+<meta property="og:title" content="El futbolín que canta los goles · Edu Herraiz">
+<meta property="og:description" content="Un futbolín Córdoba de toda la vida que cuenta los goles solo, los canta con locutor y los celebra con luces.">
+<meta property="og:image" content="https://www.eduherraiz.com/assets/edu.png">
+<meta property="og:url" content="https://www.eduherraiz.com/futbolin/">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Cinzel:wght@600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Página de noche de partido: siempre oscura, con la paleta de Ars Magna */
+:root {
+  --bg: #0c0e14;
+  --bg-2: #11131b;
+  --card: #171a25;
+  --ink: #efe6d2;
+  --muted: #9aa0b2;
+  --line: #262b3b;
+  --gold: #d9a441;
+  --terra: #c8553d;
+  --teal: #3aa6a0;
+  --madrid: #f4efe2;
+  --barca: #3d6bff;
+  --grana: #b0123a;
+  --cesped: #1d6b46;
+  --cesped-2: #185c3c;
+  --display: "Big Shoulders Display", Inter, sans-serif;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.65 Inter, system-ui, sans-serif; overflow-x: hidden; }
+a { color: var(--gold); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--gold) 35%, transparent); }
+a:hover { border-bottom-color: var(--gold); }
+img, video { max-width: 100%; display: block; }
+.wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+.narrow { max-width: 680px; }
+.top { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; font-size: 14px; }
+.top .marca { font-family: Cinzel, serif; letter-spacing: 2px; color: var(--muted); }
+
+/* Portada */
+.hero { padding: 24px 0 56px; text-align: center; }
+.kicker { font: 600 13px/1 Inter, sans-serif; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin: 0 0 18px; }
+h1 { font-family: var(--display); font-weight: 900; font-size: clamp(48px, 10vw, 104px); line-height: .92; letter-spacing: 1px; margin: 0 0 22px; text-transform: uppercase; }
+h1 em { font-style: normal; color: var(--gold); }
+.lead { font-size: clamp(18px, 2.4vw, 21px); color: var(--muted); max-width: 640px; margin: 0 auto 36px; }
+.lead b { color: var(--ink); font-weight: 500; }
+
+/* Tiras LED de 28 píxeles, como las del futbolín */
+.tira { display: grid; grid-template-columns: repeat(28, 1fr); gap: 4px; padding: 8px 10px; background: #07080c; border-radius: 6px; border: 1px solid #1c1f2b; }
+.tira i { aspect-ratio: 1; border-radius: 50%; background: #1a1d27; transition: background .08s; }
+.marco { max-width: 860px; margin: 0 auto; display: grid; gap: 10px; }
+
+/* Huecos para las tomas de Edu */
+.slot { margin: 0; aspect-ratio: 16 / 9; border: 2px dashed #39405a; border-radius: 12px; display: grid; place-items: center; text-align: center; padding: 18px; background: repeating-linear-gradient(-45deg, #11131b 0 14px, #141722 14px 28px); color: var(--muted); font-size: 14px; line-height: 1.45; }
+.slot b { display: block; font: 700 20px var(--display); letter-spacing: 2px; color: var(--gold); margin-bottom: 4px; }
+.slot.vertical { aspect-ratio: 3 / 4; }
+.slot.cuadrada { aspect-ratio: 1; }
+figure.media { margin: 0; }
+figure.media img, figure.media video { width: 100%; border-radius: 12px; }
+figcaption { font-size: 14px; color: var(--muted); margin-top: 8px; }
+
+/* Secciones */
+section { padding: 72px 0; border-top: 1px solid var(--line); }
+section.alt { background: var(--bg-2); }
+.num { font: 700 15px var(--display); letter-spacing: 3px; color: var(--terra); margin: 0 0 8px; }
+h2 { font-family: var(--display); font-weight: 900; font-size: clamp(34px, 6vw, 56px); line-height: 1; text-transform: uppercase; margin: 0 0 20px; letter-spacing: .5px; }
+h3 { font: 600 18px/1.3 Inter, sans-serif; margin: 28px 0 8px; }
+p { margin: 0 0 16px; }
+.dos { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
+.tres { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.grid-media { display: grid; gap: 16px; margin-top: 28px; }
+.nota { font-size: 14px; color: var(--muted); }
+.tag { display: inline-block; font: 600 12px Inter, sans-serif; letter-spacing: 1px; text-transform: uppercase; color: var(--teal); border: 1px solid color-mix(in srgb, var(--teal) 45%, transparent); padding: 3px 8px; border-radius: 99px; margin: 0 6px 6px 0; }
+
+/* Momentos de una partida */
+.momentos { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 32px 0; }
+.momento { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+.momento b { display: block; font: 900 22px/1 var(--display); text-transform: uppercase; margin-bottom: 8px; }
+.momento p { font-size: 14.5px; color: var(--muted); margin: 0; }
+.momento.oro { border-color: var(--gold); } .momento.oro b { color: var(--gold); }
+
+/* Simulador */
+.sim { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 18px; margin-top: 28px; }
+.marcador { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; margin-bottom: 14px; }
+.equipo { text-align: center; padding: 10px; border-radius: 12px; border: 2px solid transparent; transition: border-color .3s, box-shadow .3s; }
+.equipo .nombre { font: 900 clamp(22px, 4vw, 34px)/1 var(--display); text-transform: uppercase; letter-spacing: 1px; }
+.equipo .goles { font: 900 clamp(64px, 13vw, 112px)/1 var(--display); }
+#eq-a .nombre, #eq-a .goles { color: var(--madrid); }
+#eq-b .nombre, #eq-b .goles { color: var(--barca); }
+.equipo.bola { border-color: currentColor; color: var(--gold); box-shadow: 0 0 30px rgba(217,164,65,.25) inset; }
+.fase { text-align: center; font: 700 clamp(16px, 2.6vw, 22px)/1.1 var(--display); letter-spacing: 2px; text-transform: uppercase; color: var(--muted); min-width: 96px; }
+.fase.oro { color: var(--gold); }
+.campo { position: relative; aspect-ratio: 2.1; border-radius: 10px; background: repeating-linear-gradient(90deg, var(--cesped) 0 10%, var(--cesped-2) 10% 20%); border: 6px solid #050608; overflow: hidden; }
+.campo::before { content: ""; position: absolute; inset: 8% 4%; border: 2px solid rgba(255,255,255,.55); background: linear-gradient(90deg, transparent calc(50% - 1px), rgba(255,255,255,.55) calc(50% - 1px) calc(50% + 1px), transparent calc(50% + 1px)); }
+.campo::after { content: ""; position: absolute; left: 50%; top: 50%; width: 22%; aspect-ratio: 1; transform: translate(-50%, -50%); border: 2px solid rgba(255,255,255,.55); border-radius: 50%; }
+.porteria { position: absolute; top: 36%; height: 28%; width: 3%; background: #050608; z-index: 1; }
+.porteria.a { left: 0; } .porteria.b { right: 0; }
+.bolita { position: absolute; z-index: 2; width: 4.2%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff, #cfc8b6); left: 48%; top: 46%; transition: left .45s cubic-bezier(.5,0,.9,.6), top .45s; }
+.locutor { min-height: 56px; margin: 14px 0; padding: 12px 16px; border-left: 3px solid var(--gold); background: #0f1118; border-radius: 0 10px 10px 0; font-style: italic; }
+.locutor small { display: block; font: 600 11px Inter, sans-serif; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-style: normal; margin-bottom: 2px; }
+.bolas { display: flex; gap: 6px; justify-content: center; margin-bottom: 14px; flex-wrap: wrap; }
+.bolas i { width: 16px; height: 16px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff, #cfc8b6); transition: opacity .3s; }
+.bolas i.usada { opacity: .15; }
+.botones { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+button { font: 600 15px Inter, sans-serif; border-radius: 99px; padding: 11px 18px; border: 1px solid var(--line); background: #0f1118; color: var(--ink); cursor: pointer; }
+button:hover { border-color: var(--gold); }
+button.a { background: var(--madrid); color: #111; border-color: var(--madrid); }
+button.b { background: var(--barca); color: #fff; border-color: var(--barca); }
+button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+/* Diagramas */
+.diagrama { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 18px; margin: 28px 0 8px; }
+.diagrama { overflow-x: auto; }
+.diagrama svg { width: 100%; min-width: 560px; height: auto; display: block; }
+.diagrama text { font: 13px Inter, sans-serif; fill: var(--ink); }
+.diagrama .suave { fill: var(--muted); font-size: 12px; }
+.diagrama .tit { font: 700 17px var(--display); letter-spacing: 1px; text-transform: uppercase; }
+.caja { fill: #0f1118; stroke: var(--line); stroke-width: 1.5; }
+.caja.oro { stroke: var(--gold); }
+.caja.teal { stroke: var(--teal); }
+.flecha { stroke: var(--muted); stroke-width: 1.6; fill: none; marker-end: url(#punta); }
+.flecha.wifi { stroke-dasharray: 5 5; }
+.pulso { fill: var(--gold); }
+.sin-wifi .flecha.wifi, .sin-wifi .pulso.wifi { opacity: .15; }
+.sin-wifi .nodo-red { opacity: .35; }
+.aviso-red { opacity: 0; transition: opacity .3s; }
+.sin-wifi .aviso-red { opacity: 1; }
+
+/* Barrera animada */
+.haz { stroke: var(--terra); stroke-width: 3; stroke-linecap: round; filter: drop-shadow(0 0 4px var(--terra)); animation: corta 3.2s linear infinite; }
+.bola-carril { animation: rueda 3.2s linear infinite; }
+.mas-uno { font: 900 30px var(--display) !important; fill: var(--gold) !important; opacity: 0; animation: suma 3.2s linear infinite; }
+@keyframes rueda { from { transform: translateX(0); } to { transform: translateX(560px); } }
+@keyframes corta { 0%, 45% { opacity: 1; } 46%, 55% { opacity: .08; } 56%, 100% { opacity: 1; } }
+@keyframes suma { 0%, 46% { opacity: 0; transform: translateY(0); } 50% { opacity: 1; } 70% { opacity: 0; transform: translateY(-18px); } 100% { opacity: 0; } }
+
+/* Cifras */
+.cifras { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; margin-top: 28px; }
+.cifra { background: var(--card); padding: 22px 16px; text-align: center; }
+.cifra b { display: block; font: 900 clamp(40px, 7vw, 60px)/1 var(--display); color: var(--gold); }
+.cifra span { font-size: 14px; color: var(--muted); }
+
+/* Historia */
+.linea { list-style: none; margin: 28px 0 0; padding: 0; border-left: 2px solid var(--line); }
+.linea li { position: relative; padding: 0 0 22px 22px; }
+.linea li::before { content: ""; position: absolute; left: -7px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--bg-2); border: 2px solid var(--gold); }
+.linea .fecha { font: 700 15px var(--display); letter-spacing: 2px; color: var(--gold); text-transform: uppercase; }
+.linea p { margin: 2px 0 0; color: var(--muted); font-size: 15.5px; }
+
+.voz { list-style: none; padding: 0; margin: 20px 0; display: grid; gap: 10px; }
+.voz li { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; }
+.voz q { font-weight: 500; quotes: "«" "»"; }
+.voz span { display: block; font-size: 14px; color: var(--muted); }
+
+.cierre { text-align: center; }
+.cierre .botones a { border: 1px solid var(--gold); border-radius: 99px; padding: 11px 20px; font-weight: 600; }
+footer { padding: 40px 0 56px; text-align: center; color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); }
+
+@media (max-width: 760px) {
+  .dos, .tres { grid-template-columns: 1fr; }
+  .momentos { grid-template-columns: 1fr 1fr; }
+  .cifras { grid-template-columns: 1fr 1fr; }
+  .tira { gap: 2px; padding: 6px; }
+  section { padding: 56px 0; }
+}
+@media (max-width: 420px) {
+  .wrap { padding: 0 16px; }
+  .momentos { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .haz, .bola-carril, .mas-uno, .pulso { animation: none !important; }
+  .pulso { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap top">
+  <a href="../">← Edu Herraiz</a>
+  <span class="marca">Ars Magna Lab</span>
+</div>
+
+<header class="hero wrap">
+  <p class="kicker">Futbolín · Home Assistant · ESPHome · WLED</p>
+  <h1>El futbolín que <em>canta</em> los goles</h1>
+  <p class="lead">Un futbolín Córdoba de toda la vida, restaurado, que <b>cuenta los goles solo</b>, los canta con un locutor de estadio y los celebra con luces. Por fuera sigue igual que siempre: <b>nadie ha taladrado la portería</b>.</p>
+  <div class="marco" aria-hidden="false">
+    <div class="tira" id="hero-arriba" aria-hidden="true"></div>
+    <figure class="slot" data-toma="V1"><div><b>V1 · Un gol de principio a fin</b>Tiro, ola de luz, marcador y locutor en una sola toma. Bucle de 8–10 s con sonido.</div></figure>
+    <div class="tira" id="hero-abajo" aria-hidden="true"></div>
+  </div>
+</header>
+
+<section class="alt">
+  <div class="wrap">
+    <p class="num">01</p>
+    <h2>Una partida, de principio a fin</h2>
+    <div class="narrow">
+      <p>Se juega con 11 bolas y gana quien llega a 6. Si se llega a 5-5, la última bola se tira en el centro y es <b>«la buena»</b>. Las reglas son las de siempre en el garaje; lo nuevo es que ahora el futbolín las conoce.</p>
+    </div>
+    <div class="momentos">
+      <div class="momento"><b>Saque</b><p>«Nueva partida» con la voz. El locutor presenta el clásico como si fuera la final.</p></div>
+      <div class="momento"><b>Gol</b><p>Suma solo. Una ola de luz cruza el campo y el locutor canta el gol, cada vez con una frase distinta.</p></div>
+      <div class="momento"><b>Bola de partido</b><p>Al llegar a 5, el marcador se ilumina y suena el redoble.</p></div>
+      <div class="momento oro"><b>La buena</b><p>5-5. Todo dorado, tensión máxima y una sola bola para decidirlo.</p></div>
+      <div class="momento"><b>Victoria</b><p>Fiesta de luces y ovación. Las bolas que sobran ya no cuentan.</p></div>
+    </div>
+
+    <h3>Juega una partida aquí mismo</h3>
+    <p class="nota">Es una simulación de lo que hace el futbolín: el marcador, las dos tiras de 28 píxeles y el locutor (aquí, por escrito).</p>
+    <div class="sim" id="sim">
+      <div class="marcador">
+        <div class="equipo" id="eq-a"><div class="nombre">Madrid</div><div class="goles" id="goles-a">0</div></div>
+        <div class="fase" id="fase">Listos</div>
+        <div class="equipo" id="eq-b"><div class="nombre">Barça</div><div class="goles" id="goles-b">0</div></div>
+      </div>
+      <div class="bolas" id="bolas" aria-label="Bolas que quedan"></div>
+      <div class="marco">
+        <div class="tira" id="sim-arriba" aria-hidden="true"></div>
+        <div class="campo" aria-hidden="true"><div class="porteria a"></div><div class="porteria b"></div><div class="bolita" id="bolita"></div></div>
+        <div class="tira" id="sim-abajo" aria-hidden="true"></div>
+      </div>
+      <div class="locutor" aria-live="polite"><small>Locutor</small><span id="frase">Pulsa «Nueva partida» para empezar el clásico.</span></div>
+      <div class="botones">
+        <button class="a" data-gol="a">Gol del Madrid</button>
+        <button id="nueva">Nueva partida</button>
+        <button class="b" data-gol="b">Gol del Barça</button>
+      </div>
+    </div>
+
+    <div class="grid-media dos">
+      <figure class="slot" data-toma="V3"><div><b>V3 · «Nueva partida»</b>Se dice en voz alta y suena la presentación del clásico.</div></figure>
+      <figure class="slot" data-toma="V4"><div><b>V4 · La buena y la victoria</b>El 5-5 en dorado y el gol que gana, con la fiesta de luces.</div></figure>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="num">02</p>
+    <h2>Un Córdoba de toda la vida</h2>
+    <div class="dos">
+      <div>
+        <p>Es un futbolín Córdoba antiguo, negro, restaurado. La condición era clara: <b>por fuera no se toca</b>. Ni pantallas pegadas, ni botones nuevos, ni cables a la vista. Lo único que se ha añadido por fuera es un interruptor discreto, por debajo.</p>
+        <p>Y la portería, menos que nada. La bola es maciza y sale disparada: cualquier sensor dentro de la portería acabaría roto o devolviendo la bola al campo.</p>
+        <p>El ábaco de cuentas rojas y azules sigue en su sitio. Por si acaso.</p>
+      </div>
+      <figure class="slot vertical" data-toma="F1"><div><b>F1 · El futbolín entero</b>De tres cuartos, con el tablero cerrado y buena luz.</div></figure>
+    </div>
+    <div class="grid-media dos">
+      <figure class="slot" data-toma="F5"><div><b>F5 · La portería por fuera</b>Para que se vea que no hay nada.</div></figure>
+      <figure class="slot" data-toma="F10"><div><b>F10 · Antes de la restauración</b>Si hay alguna foto.</div></figure>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <p class="num">03</p>
+    <h2>¿Cómo sabe que es gol?</h2>
+    <div class="narrow">
+      <p>La idea intuitiva es mirar en la portería. La buena es mirar <b>después</b>: cuando la bola entra, cae por una ranura a un carril de madera que la lleva rodando hasta el cajetín. Ahí ya no va a cien por hora, va despacio y siempre por el mismo camino.</p>
+      <p>En cada carril hay una <b>barrera de infrarrojos</b>: un LED invisible a un lado y un receptor al otro. Cuando la bola pasa, corta el haz durante unas centésimas, y eso es un gol.</p>
+    </div>
+
+    <div class="diagrama" role="img" aria-label="Vista desde arriba del carril: la bola rueda entre dos cuñas de madera, corta el haz infrarrojo y suma un gol">
+      <svg viewBox="0 0 720 230">
+        <text class="tit" x="20" y="28">El carril, visto desde arriba</text>
+        <rect x="20" y="60" width="680" height="12" fill="#3a2a1c"/>
+        <rect x="20" y="168" width="680" height="12" fill="#3a2a1c"/>
+        <rect x="20" y="72" width="680" height="96" fill="#2a1f15"/>
+        <polygon points="250,72 360,72 360,96" fill="#8a6a44"/>
+        <polygon points="250,168 360,168 360,144" fill="#8a6a44"/>
+        <rect x="362" y="74" width="16" height="20" rx="3" fill="#20242f" stroke="#9aa0b2"/>
+        <rect x="362" y="146" width="16" height="20" rx="3" fill="#20242f" stroke="#9aa0b2"/>
+        <line class="haz" x1="370" y1="94" x2="370" y2="146"/>
+        <g class="bola-carril"><circle cx="80" cy="120" r="17" fill="#e8e2d2"/></g>
+        <text class="mas-uno" x="392" y="58">+1</text>
+        <text class="suave" x="388" y="88">Emisor IR</text>
+        <text class="suave" x="388" y="162">Receptor</text>
+        <text class="suave" x="210" y="208">Cuñas de madera: rampa de entrada y, detrás, el sensor a cubierto</text>
+        <text class="suave" x="24" y="52">← viene de la portería</text>
+        <text class="suave" x="560" y="52">va al cajetín →</text>
+      </svg>
+    </div>
+    <p class="nota">Las cuñas van pegadas con cola dentro del carril. La bola nunca toca los sensores y el haz cruza todo el ancho, así que pase por donde pase, lo corta. Sin un solo taladro.</p>
+
+    <div class="grid-media dos">
+      <figure class="slot" data-toma="F4"><div><b>F4 · Las cuñas y la barrera</b>De cerca, y otra con una bola pasando.</div></figure>
+      <figure class="slot" data-toma="V2"><div><b>V2 · La bola corta el haz</b>En cámara superlenta.</div></figure>
+    </div>
+
+    <div class="narrow">
+      <h3>El primer sitio era el malo</h3>
+      <p>La barrera iba al principio del carril, justo donde cae la bola. Parecía lo lógico, pero los cañonazos pasaban sin contar: la bola llegaba rebotando y el corte era tan raro que no había forma de distinguirlo del ruido. Bajarla a unos 21 cm del final del carril, donde la bola ya rueda tranquila, lo arregló del todo.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="num">04</p>
+    <h2>Del gol a la fiesta</h2>
+    <div class="narrow">
+      <p>Dentro del mueble hay un <b>ESP32</b>, un microcontrolador de pocos euros con WiFi, programado con <b>ESPHome</b>. Él lleva la partida: cuenta, sabe quién tiene bola de partido, cuándo toca «la buena» y quién ha ganado. Y avisa a dos sitios a la vez:</p>
+      <p>a las <b>tiras LED</b>, directamente, para que el efecto salga al instante, y a <b>Home Assistant</b>, que pinta el marcador en la tablet y pone la voz.</p>
+    </div>
+
+    <div class="diagrama" id="flujo" role="img" aria-label="Flujo: la barrera avisa al ESP32, que manda el efecto a las tiras y el marcador a Home Assistant y la tablet">
+      <svg viewBox="0 0 760 300">
+        <defs><marker id="punta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#9aa0b2"/></marker></defs>
+        <rect class="caja" x="20" y="120" width="130" height="64" rx="10"/>
+        <text x="85" y="148" text-anchor="middle">Barreras IR</text><text class="suave" x="85" y="168" text-anchor="middle">una por carril</text>
+        <rect class="caja oro" x="210" y="112" width="150" height="80" rx="10"/>
+        <text x="285" y="142" text-anchor="middle">ESP32 · ESPHome</text><text class="suave" x="285" y="162" text-anchor="middle">lleva la partida</text><text class="suave" x="285" y="178" text-anchor="middle">y no la olvida</text>
+        <g class="nodo-red">
+          <rect class="caja teal" x="440" y="24" width="150" height="64" rx="10"/>
+          <text x="515" y="52" text-anchor="middle">WLED</text><text class="suave" x="515" y="72" text-anchor="middle">dos tiras de 28 píxeles</text>
+          <rect class="caja teal" x="440" y="212" width="150" height="64" rx="10"/>
+          <text x="515" y="240" text-anchor="middle">Home Assistant</text><text class="suave" x="515" y="260" text-anchor="middle">el centro de control</text>
+          <rect class="caja" x="620" y="212" width="124" height="64" rx="10"/>
+          <text x="682" y="240" text-anchor="middle">Tablet</text><text class="suave" x="682" y="260" text-anchor="middle">marcador y voz</text>
+        </g>
+        <path class="flecha" d="M150 152H206"/>
+        <path id="p-tiras" class="flecha wifi" d="M360 130C400 100 400 56 436 56"/>
+        <path id="p-ha" class="flecha wifi" d="M360 174C400 204 400 244 436 244"/>
+        <path class="flecha wifi" d="M590 244H616"/>
+        <circle class="pulso" r="5"><animateMotion dur="2.4s" repeatCount="indefinite" path="M20 152H210"/></circle>
+        <circle class="pulso wifi" r="5"><animateMotion dur="2.4s" begin=".8s" repeatCount="indefinite" path="M360 130C400 100 400 56 440 56"/></circle>
+        <circle class="pulso wifi" r="5"><animateMotion dur="2.4s" begin=".8s" repeatCount="indefinite" path="M360 174C400 204 400 244 440 244"/></circle>
+        <text class="suave" x="400" y="40" text-anchor="end">WiFi, sin pasar por HA</text>
+        <g class="aviso-red"><rect x="200" y="206" width="170" height="44" rx="8" fill="#2a1410" stroke="#c8553d"/><text x="285" y="226" text-anchor="middle">Sin WiFi: sigue contando</text><text class="suave" x="285" y="242" text-anchor="middle">al volver, marcador al día</text></g>
+      </svg>
+      <div class="botones" style="margin-top:12px"><button id="corta-wifi" aria-pressed="false">Corta la WiFi</button></div>
+    </div>
+    <p class="nota">Como la cuenta vive en el ESP32, si se cae la WiFi o Home Assistant el futbolín sigue contando. Cuando vuelve la red, la tablet enseña el resultado correcto. Y si se reinicia, recuerda la partida.</p>
+    <figure class="slot" data-toma="V7" style="margin-top:20px"><div><b>V7 · La prueba de la WiFi (opcional)</b>Se corta la red, se marcan goles y al volver el marcador sale bien.</div></figure>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <p class="num">05</p>
+    <h2>Un estadio en una tablet</h2>
+    <div class="dos">
+      <div>
+        <p>El marcador es un panel de Home Assistant en una tablet que se pone al lado del futbolín al jugar: los goles en grande, las bolas que quedan, la bola de partido, «la buena» y la batería.</p>
+        <h3>El locutor</h3>
+        <p>Cada gol lo canta un locutor con una frase distinta: el primer gol, el empate, la remontada, la bola de partido, la goleada… <b>164 frases</b> grabadas de antemano con una voz sintética de OpenAI que hace de narrador deportivo, con un jugador al azar en cada una. Al empezar, presenta el clásico.</p>
+        <h3>La música que se aparta</h3>
+        <p>Con música sonando en la tablet, cada vez que habla el locutor la música baja y luego vuelve. Parece lo más fácil del proyecto y fue de lo más puñetero: con una locución de más de 5 segundos, Android pausaba la música para siempre. El truco es un segundo de silencio en bucle que pide permiso «para un momento» mientras la voz suena por otro lado.</p>
+      </div>
+      <figure class="slot vertical" data-toma="F8"><div><b>F8 · La tablet junto al futbolín</b>Con el marcador en pantalla.</div></figure>
+    </div>
+    <div class="grid-media tres">
+      <figure class="slot" data-toma="V8"><div><b>V8 · El marcador en pantalla</b>Grabación de la tablet, sin barra de direcciones.</div></figure>
+      <figure class="slot" data-toma="V6"><div><b>V6 · La música se aparta</b>Con música libre de derechos.</div></figure>
+      <figure class="slot" data-toma="F9"><div><b>F9 · Analógico y digital</b>El ábaco y la tablet juntos.</div></figure>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="num">06</p>
+    <h2>Habla con él</h2>
+    <div class="dos">
+      <div>
+        <p>El futbolín no tiene ni un botón nuevo. Todo se hace con la voz, con <b>Assist</b>, el asistente de Home Assistant, desde la misma tablet. Y si alguien mete un gol con la mano, se corrige igual.</p>
+        <ul class="voz">
+          <li><q>Nueva partida</q><span>Marcador a cero y presentación del clásico.</span></li>
+          <li><q>Gol del Madrid</q><span>Suma uno, por si una bola entra con trampa.</span></li>
+          <li><q>Quita un gol al Barça</q><span>Resta uno. Sin discusiones.</span></li>
+          <li><q>Anula la partida</q><span>Para cuando alguien se rinde.</span></li>
+        </ul>
+      </div>
+      <figure class="slot" data-toma="V5"><div><b>V5 · Una corrección por voz</b>«Quita un gol al Barça» y el marcador obedece.</div></figure>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <p class="num">07</p>
+    <h2>Luces solo cuando toca</h2>
+    <div class="dos">
+      <div>
+        <p>A cada lado del campo hay una tira LED con un controlador <b>WLED</b> (un Gledopto escondido en el mueble). La idea era tenerlas encendidas toda la partida, pero a batería gastaban demasiado. Así que se encienden solo cuando pasa algo:</p>
+        <p><span class="tag">Gol</span> una ola que cruza el campo<br>
+        <span class="tag">Bola de partido</span> un latido del color de quien la tiene<br>
+        <span class="tag">La buena</span> todo dorado<br>
+        <span class="tag">Victoria</span> fiesta<br>
+        <span class="tag">Batería baja</span> se apagan solas para que la partida no se quede a medias</p>
+        <p class="nota">Si al arrancar una barrera no responde, las tiras se ponen en rojo: el futbolín se revisa solo antes de jugar.</p>
+      </div>
+      <figure class="slot" data-toma="F2"><div><b>F2 · Las tiras encendidas</b>El mismo plano de F1, en penumbra y con la fiesta de luces.</div></figure>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="num">08</p>
+    <h2>Todo escondido y a batería</h2>
+    <div class="narrow">
+      <p>Otra condición: jugar sin cables. Un cable cruzando el garaje no aguanta una partida. Por eso todo va a batería: dos baterías de 12 V que ya había en casa, en paralelo, con unas <b>7 horas</b> de juego. Se sacan para cargarlas y, si hace falta, en su lugar se enchufa una fuente.</p>
+    </div>
+    <div class="diagrama" role="img" aria-label="Alimentación: dos baterías de 12 voltios con fusible, interruptor general, bus de 12 voltios para las tiras y un convertidor a 5 voltios para el ESP32 y las barreras">
+      <svg viewBox="0 0 760 210">
+        <rect class="caja" x="20" y="40" width="140" height="56" rx="10"/><text x="90" y="64" text-anchor="middle">Batería 12 V</text><text class="suave" x="90" y="82" text-anchor="middle">7 Ah · fusible</text>
+        <rect class="caja" x="20" y="116" width="140" height="56" rx="10"/><text x="90" y="140" text-anchor="middle">Batería 12 V</text><text class="suave" x="90" y="158" text-anchor="middle">7 Ah · fusible</text>
+        <rect class="caja oro" x="210" y="78" width="120" height="56" rx="10"/><text x="270" y="102" text-anchor="middle">Interruptor</text><text class="suave" x="270" y="120" text-anchor="middle">por debajo</text>
+        <rect class="caja" x="380" y="78" width="110" height="56" rx="10"/><text x="435" y="102" text-anchor="middle">Bus 12 V</text><text class="suave" x="435" y="120" text-anchor="middle">regleta</text>
+        <rect class="caja teal" x="550" y="20" width="190" height="56" rx="10"/><text x="645" y="44" text-anchor="middle">WLED + tiras</text><text class="suave" x="645" y="62" text-anchor="middle">12 V directos</text>
+        <rect class="caja" x="550" y="136" width="190" height="56" rx="10"/><text x="645" y="160" text-anchor="middle">Convertidor a 5 V</text><text class="suave" x="645" y="178" text-anchor="middle">ESP32 y barreras</text>
+        <path class="flecha" d="M160 68C190 68 186 100 206 100"/>
+        <path class="flecha" d="M160 144C190 144 186 112 206 112"/>
+        <path class="flecha" d="M330 106H376"/>
+        <path class="flecha" d="M490 96C520 96 520 48 546 48"/>
+        <path class="flecha" d="M490 116C520 116 520 164 546 164"/>
+      </svg>
+    </div>
+    <div class="grid-media tres">
+      <figure class="slot" data-toma="F3"><div><b>F3 · El interior</b>Con el tablero abatido: un plano general.</div></figure>
+      <figure class="slot" data-toma="F6"><div><b>F6 · El panel de electrónica</b>ESP32, convertidor y clemas.</div></figure>
+      <figure class="slot" data-toma="F7"><div><b>F7 · Controlador e interruptor</b>Debajo del mueble.</div></figure>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <p class="num">09</p>
+    <h2>Cómo se hizo</h2>
+    <ul class="linea narrow">
+      <li><span class="fecha">19 sep 2026</span><p>La idea: que el futbolín del garaje lleve el marcador solo.</p></li>
+      <li><span class="fecha">10 oct 2026</span><p>Primer cambio de planes. El diseño original llevaba una Raspberry Pi con una app hecha a medida como pantalla. Se tira: Home Assistant ya estaba en casa, y una tablet con un panel hace lo mismo, y además escucha.</p></li>
+      <li><span class="fecha">22 oct 2026</span><p>Banco de pruebas en la mesa y, después, directamente en el futbolín, sin taladrar nada.</p></li>
+      <li><span class="fecha">24 oct 2026</span><p>Los cañonazos no contaban. La barrera baja por el carril y se acaban los fallos. Las tiras gastan demasiado: pasan a encenderse solo en los momentos clave.</p></li>
+      <li><span class="fecha">25 oct 2026</span><p>Tres partidas reales, 31 goles y ni un error.</p></li>
+    </ul>
+    <div class="cifras">
+      <div class="cifra"><b>31</b><span>goles en las primeras partidas, sin un fallo</span></div>
+      <div class="cifra"><b>164</b><span>frases del locutor</span></div>
+      <div class="cifra"><b>~7 h</b><span>de juego con batería</span></div>
+      <div class="cifra"><b>0</b><span>taladros en la portería</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="cierre">
+  <div class="wrap narrow">
+    <h2>Hazte el tuyo</h2>
+    <p>El firmware, el panel del marcador, los efectos de luz y los diagramas están en GitHub, con código abierto.</p>
+    <div class="botones">
+      <a href="https://github.com/eduherraiz/futbolin-home-assistant" rel="noopener">Código en GitHub →</a>
+      <a href="https://www.youtube.com/@arsmagna_lab" rel="noopener">Canal de YouTube →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© Edu Herraiz · Ars Magna Lab · <a href="../">Volver al inicio</a></div>
+</footer>
+
+<script>
+(() => {
+  const N = 28, OFF = "#1a1d27";
+  const COL = { a: "#f4efe2", b: "#3d6bff", gold: "#d9a441", red: "#c8553d" };
+  const quieto = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function tira(id) {
+    const el = document.getElementById(id);
+    for (let i = 0; i < N; i++) el.appendChild(document.createElement("i"));
+    return [...el.children];
+  }
+
+  // Un efecto es f(i, t) → color o null, durante `dura` ms (Infinity si se queda)
+  function luces(ids) {
+    const px = ids.map(tira);
+    let ef = null, t0 = 0;
+    function frame(now) {
+      const t = now - t0;
+      if (ef && t > ef.dura) ef = null;
+      px.forEach(fila => fila.forEach((p, i) => { p.style.background = (ef && ef.f(i, t)) || OFF; }));
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+    return e => { ef = e; t0 = performance.now(); };
+  }
+
+  const efectos = {
+    // ola que cruza el campo desde la portería de quien marca
+    ola: (c, desde) => ({ dura: 1500, f: (i, t) => {
+      const x = desde === "a" ? i : N - 1 - i, frente = t / 1100 * (N + 8);
+      return Math.abs(x - frente) < 4 ? c : null; } }),
+    latido: c => ({ dura: Infinity, f: (i, t) => (Math.sin(t / 260) > .2 ? c : null) }),
+    buena: () => ({ dura: Infinity, f: (i, t) => ((i + Math.floor(t / 120)) % 4 < 2 ? COL.gold : null) }),
+    fiesta: () => ({ dura: Infinity, f: (i, t) => `hsl(${(i * 13 + t / 6) % 360} 85% 58%)` }),
+  };
+
+  // Portada: una ola cada pocos segundos, de un lado y del otro
+  const hero = luces(["hero-arriba", "hero-abajo"]);
+  if (!quieto) {
+    let lado = "a";
+    const otra = () => { hero(efectos.ola(COL[lado], lado)); lado = lado === "a" ? "b" : "a"; };
+    otra(); setInterval(otra, 3200);
+  }
+
+  // Simulador: la misma lógica de partida que el ESP32
+  const sim = luces(["sim-arriba", "sim-abajo"]);
+  const $ = id => document.getElementById(id);
+  const nombre = { a: "Madrid", b: "Barça" };
+  const azar = l => l[Math.floor(Math.random() * l.length)];
+  const NUM = ["cero", "uno", "dos", "tres", "cuatro", "cinco", "seis"];
+  const FRASES = {
+    inicio: ["¡Buenas tardes y bienvenidos al garaje! Hoy se juega el clásico. Once bolas, gana quien llegue a seis. ¡Que ruede el balón!",
+             "¡Atención, que esto empieza! Aquí no hay VAR ni excusas: lo que entra, sube al marcador. ¡A jugar!",
+             "¡Arranca el clásico! Dicen que el que gana hoy elige la cena. ¡Y a jugar!"],
+    normal: ["¡Gol del {e}!", "¡Al fondo de la red!", "¡Qué misil!", "¡A la escuadra!", "¡Imparable!",
+             "¡Sacad la grúa, que se han llevado la portería!", "¡Pepinazo del {e}!", "¡Gol de bandera!"],
+    primero: ["¡Primer gol del partido!", "¡Se adelanta el {e}!", "¡El {e} golpea primero!"],
+    empate: ["¡Empata el {e}! ¡{n} a {n}!", "¡Tablas! ¡{n} a {n}!"],
+    bola: ["¡Bola de partido para el {e}! ¡Cinco a {r}!", "¡Cinco a {r}! ¡El {e} acaricia la victoria!"],
+    buena: ["¡Cinco a cinco! ¡Nos vamos a la buena!", "¡La buena! ¡Que nadie respire!", "¡Todo se decide en la última bola!"],
+    fin: ["¡Se acabó! ¡Gana el {e} seis a {r}!", "¡Final del partido! ¡Victoria del {e}, seis a {r}!"],
+    fin5: ["¡En la buena! ¡Gana el {e} seis a cinco! ¡Qué final!", "¡La buena es del {e}! ¡Seis a cinco!"],
+    goleada: ["¡Goleada! ¡Seis a {r}! ¡Paseo del {e}!", "¡Seis a {r}! ¡Esto ha sido un baile!"],
+    acabada: ["La partida ya está decidida: las bolas que sobran no cuentan."],
+  };
+  let g, fin;
+
+  for (let i = 0; i < 11; i++) $("bolas").appendChild(document.createElement("i"));
+
+  function decir(tipo, e) {
+    const otro = e === "a" ? "b" : "a";
+    $("frase").textContent = azar(FRASES[tipo])
+      .replaceAll("{e}", nombre[e] || "").replaceAll("{n}", NUM[g.a]).replaceAll("{r}", NUM[g[otro] ?? 0]);
+  }
+
+  function pintar(fase, oro) {
+    $("goles-a").textContent = g.a; $("goles-b").textContent = g.b;
+    $("fase").textContent = fase; $("fase").classList.toggle("oro", !!oro);
+    [...$("bolas").children].forEach((b, i) => b.classList.toggle("usada", i < g.a + g.b));
+    ["a", "b"].forEach(e => $("eq-" + e).classList.toggle("bola", !fin && g[e] === 5 && g.a + g.b < 10));
+  }
+
+  function nueva() {
+    g = { a: 0, b: 0 }; fin = false;
+    pintar("0 – 0"); decir("inicio"); sim(null);
+    $("bolita").style.left = "48%"; $("bolita").style.top = "46%";
+  }
+
+  function gol(e) {
+    if (!g) nueva();
+    if (fin) { decir("acabada"); return; }
+    const otro = e === "a" ? "b" : "a";
+    g[e]++;
+    // la bolita se va a la portería contraria a quien marca
+    $("bolita").style.left = e === "a" ? "97%" : "-2%";
+    $("bolita").style.top = "46%";
+    setTimeout(() => { $("bolita").style.left = "48%"; }, 900);
+    if (g[e] === 6) {
+      fin = true;
+      pintar("Gana el " + nombre[e], true);
+      decir(g[otro] === 5 ? "fin5" : g[otro] <= 1 ? "goleada" : "fin", e);
+      sim(efectos.fiesta());
+    } else if (g.a === 5 && g.b === 5) {
+      pintar("La buena", true); decir("buena", e); sim(efectos.buena());
+    } else if (g[e] === 5) {
+      pintar("Bola de partido"); decir("bola", e);
+      sim(efectos.ola(COL[e], e));
+      setTimeout(() => { if (!fin && g[e] === 5) sim(efectos.latido(COL[e])); }, 1500);
+    } else {
+      pintar(g.a + " – " + g.b);
+      decir(g.a + g.b === 1 ? "primero" : g.a === g.b ? "empate" : "normal", e);
+      sim(efectos.ola(COL[e], e));
+    }
+  }
+
+  document.querySelectorAll("[data-gol]").forEach(b => b.addEventListener("click", () => gol(b.dataset.gol)));
+  $("nueva").addEventListener("click", nueva);
+
+  $("corta-wifi").addEventListener("click", e => {
+    const on = $("flujo").classList.toggle("sin-wifi");
+    e.target.setAttribute("aria-pressed", on);
+    e.target.textContent = on ? "Vuelve la WiFi" : "Corta la WiFi";
+  });
+})();
+</script>
+</body>
+</html>
