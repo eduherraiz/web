@@ -413,7 +413,7 @@ footer { padding: 40px 0 56px; text-align: center; color: var(--muted); font-siz
     <h2>Cableado y baterías</h2>
     <div class="narrow">
       <p>Toda la electrónica va en un panel de contrachapado junto a las baterías, en la parte fija del mueble: el ESP32, el buck que baja de 12 a 5 V, una regleta que hace de bus de 12 V y la interfaz de las barreras. Las tiras toman los 12 V directamente.</p>
-      <p>A cada carril llega un cable de 5 hilos que acaba en dos conectores JST-SM, uno para el receptor y otro para el emisor. Las resistencias de pull-up van soldadas en el extremo del cable, junto al ESP32, y un divisor de 100k/22k lleva los 12 V al GPIO 34 para calcular el % de batería.</p>
+      <p>A cada carril llega un cable de 5 hilos que acaba en dos conectores JST-SM, uno para el receptor y otro para el emisor. Las resistencias de pull-up van soldadas en el extremo del cable, junto al ESP32, y un divisor de 100k/20k lleva los 12 V al GPIO 34 para calcular el % de batería.</p>
     </div>
     <figure class="lamina"><a href="diagramas/cableado-general.svg" aria-label="Abrir el diagrama a tamaño completo"><img src="diagramas/cableado-general.svg" width="760" height="440" alt="Esquema general: dos baterías con su fusible, el interruptor, el bus de 12 V, el Gledopto con las tiras, el buck a 5 V, el ESP32 y la interfaz con los cables de los dos carriles" loading="lazy"></a><figcaption>El esquema general. En rojo, los +12 V.</figcaption></figure>
     <h3>El ESP32 y las barreras</h3>
