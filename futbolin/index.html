@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Un futbolín Córdoba en Home Assistant · Edu Herraiz</title>
+<title>Domotizando un futbolín (con Home Assistant) · Edu Herraiz</title>
 <meta name="description" content="Un futbolín Córdoba restaurado que cuenta los goles con barreras IR y un ESP32 con ESPHome, con marcador en un dashboard de Home Assistant, voz con Assist y efectos con WLED. A batería y sin taladrar la portería.">
 <meta name="author" content="Edu Herraiz">
 <link rel="canonical" href="https://www.eduherraiz.com/futbolin/">
-<meta property="og:title" content="Un futbolín Córdoba en Home Assistant · Edu Herraiz">
+<meta property="og:title" content="Domotizando un futbolín (con Home Assistant) · Edu Herraiz">
 <meta property="og:description" content="Barreras IR, ESPHome, WLED y Assist en un futbolín Córdoba restaurado, sin taladrar la portería.">
 <meta property="og:image" content="https://www.eduherraiz.com/assets/edu.png">
 <meta property="og:url" content="https://www.eduherraiz.com/futbolin/">
@@ -47,10 +47,11 @@ pre .s { color: var(--gold); }
 .top .marca { font-family: Cinzel, serif; letter-spacing: 2px; color: var(--muted); }
 
 /* Portada */
-.hero { padding: 24px 0 64px; text-align: center; }
+.hero { padding: 36px 0 64px; text-align: center; }
 .kicker { font: 600 13px/1 Inter, sans-serif; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin: 0 0 18px; }
 h1 { font-family: var(--display); font-weight: 900; font-size: clamp(44px, 8.5vw, 92px); line-height: .95; letter-spacing: 1px; margin: 0 0 22px; text-transform: uppercase; }
 h1 em { font-style: normal; color: var(--gold); }
+h1 small { display: block; font-size: .42em; letter-spacing: 2px; color: var(--muted); margin-top: 12px; }
 .lead { font-size: clamp(18px, 2.3vw, 20px); color: var(--muted); max-width: 680px; margin: 0 auto 24px; }
 .lead b { color: var(--ink); font-weight: 500; }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 0 0 36px; }
@@ -157,8 +158,8 @@ footer { padding: 40px 0 56px; text-align: center; color: var(--muted); font-siz
 </div>
 
 <header class="hero wrap">
-  <p class="kicker">Proyecto · Home Assistant</p>
-  <h1>Un futbolín Córdoba en <em>Home Assistant</em></h1>
+  <p class="kicker">Un futbolín Córdoba restaurado</p>
+  <h1>Domotizando un <em>futbolín</em><small>(con Home Assistant)</small></h1>
   <p class="lead">Barreras de infrarrojos en los carriles de recogida y un <b>ESP32 con ESPHome</b> que lleva la partida. El marcador es un <b>dashboard</b> en la tablet, con locutor y música, se controla por voz con <b>Assist</b> y los goles se celebran con <b>WLED</b>. Va a batería, escondido en el mueble, y la portería no se ha tocado.</p>
   <div class="chips"><span>ESPHome</span><span>WLED</span><span>Assist</span><span>Dashboard</span><span>ESP32</span><span>Barreras IR</span></div>
   <figure class="slot" data-toma="V1"><div><b>V1 · Un gol de principio a fin</b>Tiro, ola de luz, marcador y locutor en una sola toma. Bucle de 8–10 s con sonido.</div></figure>
