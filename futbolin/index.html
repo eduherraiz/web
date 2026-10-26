@@ -92,6 +92,7 @@ p { margin: 0 0 16px; }
 .sim { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 18px; margin-top: 28px; }
 .marcador { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; margin-bottom: 14px; }
 .equipo { text-align: center; padding: 10px; border-radius: 12px; border: 2px solid transparent; transition: border-color .3s, box-shadow .3s; }
+.equipo .escudo { height: clamp(40px, 8vw, 64px); width: auto; margin: 0 auto 8px; filter: drop-shadow(0 2px 6px rgba(0,0,0,.6)); }
 .equipo .nombre { font: 900 clamp(22px, 4vw, 34px)/1 var(--display); text-transform: uppercase; letter-spacing: 1px; }
 .equipo .goles { font: 900 clamp(64px, 13vw, 112px)/1 var(--display); }
 #eq-a .nombre, #eq-a .goles { color: var(--madrid); }
@@ -220,9 +221,9 @@ footer { padding: 40px 0 56px; text-align: center; color: var(--muted); font-siz
     <p class="nota">Es una simulación de lo que hace el futbolín: el marcador, las dos tiras de 28 píxeles y el locutor (aquí, por escrito).</p>
     <div class="sim" id="sim">
       <div class="marcador">
-        <div class="equipo" id="eq-a"><div class="nombre">Madrid</div><div class="goles" id="goles-a">0</div></div>
+        <div class="equipo" id="eq-a"><img class="escudo" src="escudos/madrid.svg" alt="Escudo del Real Madrid"><div class="nombre">Madrid</div><div class="goles" id="goles-a">0</div></div>
         <div class="fase" id="fase">Listos</div>
-        <div class="equipo" id="eq-b"><div class="nombre">Barça</div><div class="goles" id="goles-b">0</div></div>
+        <div class="equipo" id="eq-b"><img class="escudo" src="escudos/barcelona.svg" alt="Escudo del FC Barcelona"><div class="nombre">Barça</div><div class="goles" id="goles-b">0</div></div>
       </div>
       <div class="bolas" id="bolas" aria-label="Bolas que quedan"></div>
       <div class="marco">
@@ -464,7 +465,7 @@ footer { padding: 40px 0 56px; text-align: center; color: var(--muted); font-siz
     <h2>Hazte el tuyo</h2>
     <p>El firmware, el panel del marcador, los efectos de luz y los diagramas están en GitHub, con código abierto.</p>
     <div class="botones">
-      <a href="https://github.com/eduherraiz/futbolin-home-assistant" rel="noopener">Código en GitHub →</a>
+      <a href="https://github.com/ars-magna-lab/futbolin-home-assistant" rel="noopener">Código en GitHub →</a>
       <a href="https://www.youtube.com/@arsmagna_lab" rel="noopener">Canal de YouTube →</a>
     </div>
   </div>
@@ -522,6 +523,13 @@ footer { padding: 40px 0 56px; text-align: center; color: var(--muted); font-siz
   const sim = luces(["sim-arriba", "sim-abajo"]);
   const $ = id => document.getElementById(id);
   const nombre = { a: "Madrid", b: "Barça" };
+  // Las plantillas del locutor: marcan más los delanteros que los defensas
+  const PORTERO = { a: "Courtois", b: "Joan García" };
+  const JUGADORES = {
+    a: [["Mbappé", "Vinícius", "Rodrygo", "Endrick", "Brahim"], ["Bellingham", "Valverde", "Arda Güler", "Camavinga", "Tchouaméni"], ["Trent", "Huijsen", "Militão", "Rüdiger", "Carreras"]],
+    b: [["Lamine Yamal", "Raphinha", "Gabriel Jesus", "Adeyemi", "Gordon"], ["Pedri", "Gavi", "Fermín", "Dani Olmo", "Frenkie de Jong"], ["Cancelo", "Balde", "Cubarsí", "Koundé", "Eric García"]],
+  };
+  const goleador = e => { const r = Math.random(); const l = JUGADORES[e][r < .55 ? 0 : r < .9 ? 1 : 2]; return l[Math.floor(Math.random() * l.length)]; };
   // sin repetir la frase anterior, como el locutor de verdad
   let ultima = "";
   const azar = l => { const op = l.length > 1 ? l.filter(x => x !== ultima) : l; return (ultima = op[Math.floor(Math.random() * op.length)]); };
@@ -530,14 +538,14 @@ footer { padding: 40px 0 56px; text-align: center; color: var(--muted); font-siz
     inicio: ["¡Buenas tardes y bienvenidos al garaje! Hoy se juega el clásico. Once bolas, gana quien llegue a seis. ¡Que ruede el balón!",
              "¡Atención, que esto empieza! Aquí no hay VAR ni excusas: lo que entra, sube al marcador. ¡A jugar!",
              "¡Arranca el clásico! Dicen que el que gana hoy elige la cena. ¡Y a jugar!"],
-    normal: ["¡Gol del {e}!", "¡Al fondo de la red!", "¡Qué misil!", "¡A la escuadra!", "¡Imparable!",
-             "¡Sacad la grúa, que se han llevado la portería!", "¡Pepinazo del {e}!", "¡Gol de bandera!"],
-    primero: ["¡Primer gol del partido!", "¡Se adelanta el {e}!", "¡El {e} golpea primero!"],
-    empate: ["¡Empata el {e}! ¡{n} a {n}!", "¡Tablas! ¡{n} a {n}!"],
-    bola: ["¡Bola de partido para el {e}! ¡Cinco a {r}!", "¡Cinco a {r}! ¡El {e} acaricia la victoria!"],
-    buena: ["¡Cinco a cinco! ¡Nos vamos a la buena!", "¡La buena! ¡Que nadie respire!", "¡Todo se decide en la última bola!"],
-    fin: ["¡Se acabó! ¡Gana el {e} seis a {r}!", "¡Final del partido! ¡Victoria del {e}, seis a {r}!"],
-    fin5: ["¡En la buena! ¡Gana el {e} seis a cinco! ¡Qué final!", "¡La buena es del {e}! ¡Seis a cinco!"],
+    normal: ["¡Gol de {j}!", "¡Al fondo de la red! ¡{j}!", "¡Qué misil de {j}!", "¡A la escuadra! ¡{j}!", "¡Imparable, {j}!",
+             "¡Sacad la grúa, que {j} se ha llevado la portería!", "¡Eso no lo para ni {p}! ¡{j}!", "¡Gol de bandera de {j}!"],
+    primero: ["¡Primer gol del partido! ¡{j}!", "¡Se adelanta el {e}! ¡Gol de {j}!", "¡Abre el marcador {j}!"],
+    empate: ["¡Empata el {e}! ¡{n} a {n}!", "¡Gol de {j}! ¡Tablas: {n} a {n}!"],
+    bola: ["¡Gol de {j}! ¡Bola de partido para el {e}! ¡Cinco a {r}!", "¡Cinco a {r}! ¡El {e} acaricia la victoria!"],
+    buena: ["¡Gol de {j}! ¡Cinco a cinco! ¡Nos vamos a la buena!", "¡La buena! ¡Que nadie respire!", "¡{j} nos lleva a la buena! ¡Tensión máxima en el garaje!"],
+    fin: ["¡Se acabó! ¡Gana el {e} seis a {r}! ¡{j} pone la puntilla!", "¡Final del partido! ¡Victoria del {e}, seis a {r}!"],
+    fin5: ["¡En la buena! ¡{j} lo decide! ¡Gana el {e} seis a cinco!", "¡La buena es del {e}! ¡Seis a cinco! ¡Gol de {j}!"],
     goleada: ["¡Goleada! ¡Seis a {r}! ¡Paseo del {e}!", "¡Seis a {r}! ¡Esto ha sido un baile!"],
     corta: ["¡Pum!", "¡Para casa!", "¡Toma castaña!"],
     acabada: ["La partida ya está decidida: las bolas que sobran no cuentan."],
@@ -549,6 +557,7 @@ footer { padding: 40px 0 56px; text-align: center; color: var(--muted); font-siz
   function decir(tipo, e) {
     const otro = e === "a" ? "b" : "a";
     $("frase").textContent = azar(FRASES[tipo])
+      .replaceAll("{j}", e ? goleador(e) : "").replaceAll("{p}", PORTERO[otro])
       .replaceAll("{e}", nombre[e] || "").replaceAll("{n}", NUM[g.a]).replaceAll("{r}", NUM[g[otro] ?? 0]);
   }
 
