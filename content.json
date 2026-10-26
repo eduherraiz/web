@@ -72,6 +72,13 @@
   "news": [
     {
       "date": "2026-10",
+      "url": "https://www.eduherraiz.com/futbolin/",
+      "es": "Futbolín con Home Assistant: un futbolín antiguo que cuenta los goles solo, con marcador de estadio y locutor.",
+      "en": "Home Assistant foosball table: an old foosball table that keeps score by itself, with a stadium scoreboard and a commentator.",
+      "ca": "Futbolí amb Home Assistant: un futbolí antic que compta els gols tot sol, amb marcador d'estadi i locutor."
+    },
+    {
+      "date": "2026-10",
       "url": "https://ars-domus.arsmagnalab.com",
       "es": "Ars Domus: tu casa en 3D con Claude Code y three.js, con demo y código abierto.",
       "en": "Ars Domus: your house in 3D with Claude Code and three.js, with a demo and open source code.",
