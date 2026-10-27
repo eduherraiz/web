@@ -27,7 +27,6 @@
       "ars_link": "Canal de YouTube",
       "work_text": "Cloud architect y developer en {nagarro}, que antes era {apsl} hasta que Nagarro la compró. Trabajo con AWS, GNU/Linux y Python, y me obsesiona automatizar: integración continua, infraestructura como código y sistemas que se reparan solos.",
       "contact_text": "Para colaboraciones, proyectos o simplemente saludar:",
-      "back": "Volver al inicio",
       "footer": "Hecha «a mano» en Mallorca. Sin cookies ni rastreadores.",
       "months": "ene feb mar abr may jun jul ago sep oct nov dic",
       "ars_github_link": "Proyectos en GitHub"
@@ -45,7 +44,6 @@
       "ars_link": "YouTube channel",
       "work_text": "Cloud architect and developer at {nagarro}, formerly {apsl} until Nagarro acquired it. I work with AWS, GNU/Linux and Python, and I'm obsessed with automation: continuous integration, infrastructure as code and self-healing systems.",
       "contact_text": "For collaborations, projects or just to say hi:",
-      "back": "Back to home",
       "footer": "“Handmade” in Mallorca. No cookies, no trackers.",
       "months": "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec",
       "ars_github_link": "Projects on GitHub"
@@ -63,7 +61,6 @@
       "ars_link": "Canal de YouTube",
       "work_text": "Cloud architect i developer a {nagarro}, que abans era {apsl} fins que Nagarro la va comprar. Faig feina amb AWS, GNU/Linux i Python, i m'obsessiona automatitzar: integració contínua, infraestructura com a codi i sistemes que es reparen tot sols.",
       "contact_text": "Per a col·laboracions, projectes o simplement per saludar:",
-      "back": "Tornar a l'inici",
       "footer": "Feta «a mà» a Mallorca. Sense galetes ni rastrejadors.",
       "months": "gen febr març abr maig juny jul ag set oct nov des",
       "ars_github_link": "Projectes a GitHub"
@@ -72,7 +69,11 @@
   "news": [
     {
       "date": "2026-10",
-      "url": "https://www.eduherraiz.com/futbolin/",
+      "url": {
+        "es": "https://arsmagnalab.com/futbolin/",
+        "en": "https://arsmagnalab.com/en/futbolin/",
+        "ca": "https://arsmagnalab.com/ca/futbolin/"
+      },
       "es": "Futbolín con Home Assistant: un futbolín antiguo que cuenta los goles solo, con marcador de estadio y locutor.",
       "en": "Home Assistant foosball table: an old foosball table that keeps score by itself, with a stadium scoreboard and a commentator.",
       "ca": "Futbolí amb Home Assistant: un futbolí antic que compta els gols tot sol, amb marcador d'estadi i locutor."
@@ -123,10 +124,14 @@
         [
           {
             "es": "Cómo funciona",
-            "en": "How it works (in Spanish)",
-            "ca": "Com funciona (en castellà)"
+            "en": "How it works",
+            "ca": "Com funciona"
           },
-          "https://www.eduherraiz.com/futbolin/"
+          {
+            "es": "https://arsmagnalab.com/futbolin/",
+            "en": "https://arsmagnalab.com/en/futbolin/",
+            "ca": "https://arsmagnalab.com/ca/futbolin/"
+          }
         ],
         [
           "GitHub",
@@ -214,50 +219,6 @@
       ]
     }
   ],
-  "name_page": {
-    "es": {
-      "title": "¿Por qué Ars Magna Lab?",
-      "lead": "En 1274, Ramon Llull subió al Puig de Randa y bajó con una idea muy rara para su época: una máquina para razonar.",
-      "body": [
-        "Llull (c. 1232–1316) fue un filósofo, escritor y místico mallorquín. Según contó él mismo, en la cima de Randa tuvo la iluminación de un método al que llamó Art: un sistema para combinar unos pocos principios y, a partir de ellos, llegar a la verdad sobre cualquier tema. Lo reescribió durante toda su vida. La versión final, el Ars generalis ultima, es la que conocemos como Ars Magna.",
-        "El truco eran las letras y los círculos. En esa versión, nueve principios se representan con las letras B a K y se colocan en círculos concéntricos de papel que giran. Al girarlos van saliendo todas las combinaciones posibles, de forma mecánica, sin depender de la inspiración de quien las mira. Es una de las primeras ideas de un procedimiento automático para generar razonamientos.",
-        "Cuatro siglos después, Leibniz lo leyó, escribió su Dissertatio de arte combinatoria (1666) y soñó con un cálculo capaz de zanjar cualquier discusión haciendo cuentas. Por eso a Llull se le cita a menudo entre los precursores lejanos de la informática."
-      ],
-      "lab_title": "¿Y el «Lab»?",
-      "lab": [
-        "Aquí es donde construyo mis máquinas: domótica, apps, juegos e IA. No son ruedas de papel, pero la idea es la misma: combinar piezas sencillas para que una máquina piense, juegue o ayude.",
-        "Y como el Puig de Randa está en Algaida, donde vivo y ando, el nombre casi se eligió solo. El emblema es la Figura A de Llull redibujada: las nueve letras, las líneas que las unen y los anillos que giran."
-      ]
-    },
-    "en": {
-      "title": "Why Ars Magna Lab?",
-      "lead": "In 1274, Ramon Llull climbed Puig de Randa and came down with an idea that was very strange for its time: a machine for reasoning.",
-      "body": [
-        "Llull (c. 1232–1316) was a Mallorcan philosopher, writer and mystic. By his own account, on top of Randa he had the illumination of a method he called the Art: a system for combining a few principles and, from them, reaching the truth about any subject. He kept rewriting it all his life. The final version, the Ars generalis ultima, is the one known as the Ars Magna.",
-        "The trick was letters and circles. In that version, nine principles are represented by the letters B to K and placed on concentric paper circles that rotate. Turning them produces every possible combination, mechanically, without relying on the inspiration of whoever is looking. It is one of the earliest ideas of an automatic procedure for generating arguments.",
-        "Four centuries later Leibniz read him, wrote his Dissertatio de arte combinatoria (1666) and dreamed of a calculus that could settle any dispute by doing sums. That is why Llull is often named among the distant forerunners of computing."
-      ],
-      "lab_title": "And the “Lab”?",
-      "lab": [
-        "This is where I build my machines: home automation, apps, games and AI. They are not paper wheels, but the idea is the same: combine simple pieces so a machine can think, play or help.",
-        "And since Puig de Randa is in Algaida, where I live and roam, the name almost picked itself. The emblem is Llull's Figure A redrawn: the nine letters, the lines joining them and the rotating rings."
-      ]
-    },
-    "ca": {
-      "title": "Per què Ars Magna Lab?",
-      "lead": "El 1274, Ramon Llull va pujar al Puig de Randa i en va baixar amb una idea molt estranya per a la seva època: una màquina per raonar.",
-      "body": [
-        "Llull (c. 1232–1316) va ser un filòsof, escriptor i místic mallorquí. Segons va contar ell mateix, al cim de Randa va tenir la il·luminació d'un mètode que va anomenar Art: un sistema per combinar uns pocs principis i, a partir d'ells, arribar a la veritat sobre qualsevol tema. El va reescriure tota la vida. La versió final, l'Ars generalis ultima, és la que coneixem com a Ars Magna.",
-        "El truc eren les lletres i els cercles. En aquesta versió, nou principis es representen amb les lletres B a K i es col·loquen en cercles concèntrics de paper que giren. En girar-los van sortint totes les combinacions possibles, de manera mecànica, sense dependre de la inspiració de qui les mira. És una de les primeres idees d'un procediment automàtic per generar raonaments.",
-        "Quatre segles després, Leibniz el va llegir, va escriure la seva Dissertatio de arte combinatoria (1666) i va somiar un càlcul capaç de resoldre qualsevol discussió fent comptes. Per això sovint es cita Llull entre els precursors llunyans de la informàtica."
-      ],
-      "lab_title": "I el «Lab»?",
-      "lab": [
-        "Aquí és on construeixo les meves màquines: domòtica, apps, jocs i IA. No són rodes de paper, però la idea és la mateixa: combinar peces senzilles perquè una màquina pensi, jugui o ajudi.",
-        "I com que el Puig de Randa és a Algaida, on visc i camino, el nom gairebé es va triar tot sol. L'emblema és la Figura A de Llull redibuixada: les nou lletres, les línies que les uneixen i els anells que giren."
-      ]
-    }
-  },
   "work_links": {
     "nagarro": {
       "es": "https://www.nagarro.com/es",

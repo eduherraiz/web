@@ -5,9 +5,8 @@ Usage: python3 build.py            # generate
 
 Output, per language (es at the root, the others under /<lang>/):
   index.html                 home
-  ars-magna-lab/index.html   why the name
-
-futbolin/index.html is written by hand (Spanish only) and not generated here.
+plus the redirects in REDIRECTS: pages that moved to arsmagnalab.com
+(GitHub Pages has no server-side redirects, so they are meta refresh pages).
 
 Only live projects are listed: an entry without links is skipped. When a
 project's site dies, point it to its repo instead of removing it.
@@ -24,6 +23,13 @@ ROOT = Path(__file__).resolve().parent
 SITE = "https://www.eduherraiz.com/"
 LANG_NAMES = {"es": "Español", "en": "English", "ca": "Català"}
 WORK_NAMES = {"nagarro": "Nagarro", "apsl": "APSL"}
+ARS = "https://arsmagnalab.com/"
+REDIRECTS = {
+    "futbolin/index.html": ARS + "futbolin/",
+    "ars-magna-lab/index.html": ARS + "llull/",
+    "en/ars-magna-lab/index.html": ARS + "en/llull/",
+    "ca/ars-magna-lab/index.html": ARS + "ca/llull/",
+}
 
 
 def t(v, lang):
@@ -100,8 +106,8 @@ def shell(c, lang, path, title, description, body):
 
 def project(p, lang, prefix):
     meta = " · ".join(x for x in [p.get("year", ""), t(p.get("tags", ""), lang)] if x)
-    links = " ".join(f'{ext(u)}{escape(t(k, lang))}</a>' for k, u in p["links"])
-    img = (f'<a class="thumb" href="{escape(p["links"][0][1])}" rel="noopener" tabindex="-1">'
+    links = " ".join(f'{ext(t(u, lang))}{escape(t(k, lang))}</a>' for k, u in p["links"])
+    img = (f'<a class="thumb" href="{escape(t(p["links"][0][1], lang))}" rel="noopener" tabindex="-1">'
            f'<img src="{prefix}assets/projects/{p["image"]}" width="176" height="99" alt="" loading="lazy"></a>') if p.get("image") else ""
     return f"""      <li class="proj">
         {img}
@@ -120,7 +126,7 @@ def home(c, lang):
     months = ui["months"].split()
     news = "\n".join(
         f'      <li><span class="date">{months[int(n["date"][5:]) - 1]} {n["date"][:4]}</span>'
-        f'{ext(n["url"])}{escape(n[lang])}</a></li>' for n in c["news"])
+        f'{ext(t(n["url"], lang))}{escape(n[lang])}</a></li>' for n in c["news"])
     projects = "\n".join(project(p, lang, prefix) for p in c["projects"] if p.get("links"))
     work = escape(ui["work_text"])
     for k, urls in c["work_links"].items():
@@ -138,7 +144,7 @@ def home(c, lang):
   <section class="ars">
     <h2>{figure_a(30)}<span>Ars Magna Lab</span></h2>
     <p>{escape(ui["ars_intro"])}</p>
-    <p class="more">{ext(L["ars_web"])}arsmagnalab.com →</a> <a href="ars-magna-lab/">{ui["why_link"]} →</a> {ext(L["youtube"])}{ui["ars_link"]} →</a> {ext(L["ars_github"])}{ui["ars_github_link"]} →</a></p>
+    <p class="more">{ext(L["ars_web"])}arsmagnalab.com →</a> {ext(ARS + base(lang) + "llull/")}{ui["why_link"]} →</a> {ext(L["youtube"])}{ui["ars_link"]} →</a> {ext(L["ars_github"])}{ui["ars_github_link"]} →</a></p>
     <h3>{ui["news"]}</h3>
     <ul class="news">
 {news}
@@ -165,28 +171,25 @@ def home(c, lang):
     return shell(c, lang, "", ui["title"], ui["description"], body)
 
 
-def name_page(c, lang):
-    ui = c["ui"][lang]
-    n = c["name_page"][lang]
-    paras = lambda ps: "\n".join(f"    <p>{escape(p)}</p>" for p in ps)
-    body = f"""
-  <article class="essay">
-    <p class="back"><a href="../">← {ui["back"]}</a></p>
-    <h1>{escape(n["title"])}</h1>
-    <p class="lead">{escape(n["lead"])}</p>
-    <figure>{figure_a(260, letters=True)}</figure>
-{paras(n["body"])}
-    <h2>{escape(n["lab_title"])}</h2>
-{paras(n["lab"])}
-    <p class="back"><a href="../">← {ui["back"]}</a></p>
-  </article>
+def redirect(url):
+    return f"""<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>{url}</title>
+<link rel="canonical" href="{url}">
+<meta http-equiv="refresh" content="0; url={url}">
+</head>
+<body>
+<p><a href="{url}">{url}</a></p>
+</body>
+</html>
 """
-    return shell(c, lang, "ars-magna-lab/", f'{n["title"]} · {c["name"]}', n["lead"], body)
 
 
 def check(c):
-    urls = [n["url"] for n in c["news"]]
-    urls += [u for p in c["projects"] for _, u in p.get("links", [])]
+    urls = [t(n["url"], l) for n in c["news"] for l in c["langs"]]
+    urls += [t(u, l) for p in c["projects"] for _, u in p.get("links", []) for l in c["langs"]]
     urls += [t(us, l) for us in c["work_links"].values() for l in c["langs"]]
     urls += list(c["links"].values())
     bad = []
@@ -209,12 +212,11 @@ def main():
         sys.exit(1)
     out = []
     for lang in c["langs"]:
-        for rel, html in ((base(lang) + "index.html", home(c, lang)),
-                          (base(lang) + "ars-magna-lab/index.html", name_page(c, lang))):
-            f = ROOT / rel
-            f.parent.mkdir(parents=True, exist_ok=True)
-            f.write_text(html)
-            out.append(rel)
+        (ROOT / base(lang) / "index.html").write_text(home(c, lang))
+        out.append(base(lang) + "index.html")
+    for rel, url in REDIRECTS.items():
+        (ROOT / rel).write_text(redirect(url))
+        out.append(f"{rel} → {url}")
     print(", ".join(out))
 
 
