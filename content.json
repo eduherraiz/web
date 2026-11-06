@@ -68,6 +68,13 @@
   },
   "news": [
     {
+      "date": "2026-11",
+      "url": "https://www.youtube.com/watch?v=480Ta170Xg8",
+      "es": "Vídeo: reforma tu casa en 3D con Claude Code, con Ars Domus.",
+      "en": "Video: renovate your house in 3D with Claude Code, with Ars Domus.",
+      "ca": "Vídeo: reforma ca teva en 3D amb Claude Code, amb Ars Domus."
+    },
+    {
       "date": "2026-10",
       "url": {
         "es": "https://arsmagnalab.com/futbolin/",
@@ -155,6 +162,14 @@
         [
           "GitHub",
           "https://github.com/ars-magna-lab/ars-domus"
+        ],
+        [
+          {
+            "es": "Vídeo",
+            "en": "Video",
+            "ca": "Vídeo"
+          },
+          "https://www.youtube.com/watch?v=480Ta170Xg8"
         ]
       ]
     },
